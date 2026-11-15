@@ -36,17 +36,23 @@
     <style>
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #010308;
         }
         ::-webkit-scrollbar-thumb {
             background: #0f1f42;
-            border-radius: 4px;
+            border-radius: 3px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #172e61;
+        }
+
+        /* Prevent horizontal overflow on mobile */
+        body {
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         /* Animated Deep Midnight Dark Blue & Black Gradient Background */
@@ -994,20 +1000,20 @@
     </div>
 
     <!-- Navigation Bar -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-obsidian/80 backdrop-blur-xl border-b border-slateborder/70 page-header-enter">
-        <div class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 h-16 sm:h-20 flex items-center justify-between">
+    <header class="fixed top-0 inset-x-0 z-40 bg-obsidian/90 backdrop-blur-xl border-b border-slateborder/70 page-header-enter">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 h-16 sm:h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <a href="#about" class="nav-smooth-link flex items-center gap-2.5 group">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-zinc-200 to-zinc-600 p-[1px] icon-bounce-hover">
+            <a href="#about" class="nav-smooth-link flex items-center gap-2 group min-w-0">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-zinc-200 to-zinc-600 p-[1px] icon-bounce-hover shrink-0">
                     <div class="w-full h-full bg-obsidian rounded-[7px] flex items-center justify-center group-hover:bg-charcoal transition">
-                        <span class="font-mono text-xs font-bold tracking-tighter text-platinum">LCH</span>
+                        <span class="font-mono text-[10px] sm:text-xs font-bold tracking-tighter text-platinum">LCH</span>
                     </div>
                 </div>
-                <span id="navBrandName" class="font-semibold tracking-wider text-sm sm:text-base uppercase text-platinum">LE CONG HOANG</span>
+                <span id="navBrandName" class="font-semibold tracking-wider text-xs sm:text-base uppercase text-platinum truncate">LE CONG HOANG</span>
             </a>
 
-            <!-- Smooth Anchor Links -->
-            <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-silver">
+            <!-- Smooth Anchor Links (Desktop) -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-silver">
                 <a href="#about" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">About</a>
                 <a href="#experience" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Experience</a>
                 <a href="#visual-led" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Visual Led</a>
@@ -1016,10 +1022,10 @@
                 <a href="#contact" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Contact</a>
             </nav>
 
-            <!-- Action Controls -->
-            <div class="flex items-center gap-2.5">
-                <button id="toggleEditBtn" onclick="toggleEditMode()" class="group px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slateborder bg-charcoal/90 hover:bg-graphite text-platinum transition-all flex items-center gap-2 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-3" aria-hidden="true" class="lucide lucide-edit-3 w-4 h-4 text-silver icon-bounce-hover"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            <!-- Action Controls (Hidden Edit Trigger for Owner Only) -->
+            <div class="flex items-center gap-2">
+                <button id="toggleEditBtn" onclick="toggleEditMode()" class="hidden group px-3 py-2 rounded-xl text-xs font-medium border border-slateborder bg-charcoal/90 hover:bg-graphite text-platinum transition-all items-center gap-1.5 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-3" aria-hidden="true" class="lucide lucide-edit-3 w-3.5 h-3.5 text-silver icon-bounce-hover"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
                     <span id="toggleEditText">Edit</span>
                 </button>
             </div>
@@ -1027,175 +1033,175 @@
     </header>
 
     <!-- Main Content -->
-    <main class="relative z-10 pt-28 sm:pt-36 pb-24 w-full">
+    <main class="relative z-10 pt-24 sm:pt-36 pb-20 sm:pb-24 w-full overflow-x-hidden">
 
         <!-- HERO / ABOUT SECTION -->
-        <section id="about" class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-24 sm:mb-32 scroll-mt-28">
+        <section id="about" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-32 scroll-mt-24 sm:scroll-mt-28">
             <div class="reveal active">
                 <!-- Centered Hero Banner: Large Scaled Name & Role -->
-                <div class="text-center max-w-5xl mx-auto pt-4 sm:pt-8 pb-14 sm:pb-20 flex flex-col items-center">
+                <div class="text-center max-w-5xl mx-auto pt-2 sm:pt-8 pb-10 sm:pb-20 flex flex-col items-center">
                     <!-- Status Badge -->
-                    <div class="animate-slide-down-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-charcoal/90 border border-slateborder text-xs font-mono text-silver mb-6 sm:mb-8 shadow-lg">
-                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse shadow-[0_0_8px_rgba(96,165,250,0.9)]"></span>
-                        <span>STAGE VISUALS • 3D MAPPING • CONCERT LED</span>
+                    <div class="animate-slide-down-1 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-charcoal/90 border border-slateborder text-[11px] sm:text-xs font-mono text-silver mb-5 sm:mb-8 shadow-lg text-center max-w-[92vw]">
+                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse shadow-[0_0_8px_rgba(96,165,250,0.9)] shrink-0"></span>
+                        <span class="truncate">STAGE VISUALS • 3D MAPPING • CONCERT LED</span>
                     </div>
 
                     <!-- Main Name & Role (Centered & Scaled Up) -->
-                    <h1 id="profileName" data-editable="true" data-field="name" class="animate-slide-down-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.12] py-1 mb-4 bg-gradient-to-b from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(37,99,235,0.22)] min-h-[1.2em]">
+                    <h1 id="profileName" data-editable="true" data-field="name" class="animate-slide-down-2 text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.12] py-1 mb-3 sm:mb-4 bg-gradient-to-b from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(37,99,235,0.22)] min-h-[1.2em] px-2">
                         LE CONG HOANG
                     </h1>
-                    <p id="profileRole" data-editable="true" data-field="role" class="animate-slide-down-2 text-base sm:text-xl lg:text-2xl font-medium tracking-wide text-silver mb-8 sm:mb-10">
+                    <p id="profileRole" data-editable="true" data-field="role" class="animate-slide-down-2 text-sm sm:text-xl lg:text-2xl font-medium tracking-wide text-silver mb-6 sm:mb-10 px-2">
                         Visual Artist / Motion Graphics / Video Editor
                     </p>
 
                     <!-- Centered Action Buttons -->
-                    <div class="animate-slide-down-4 flex flex-wrap items-center justify-center gap-3.5">
-                        <a href="#visual-led" class="glow-border-card nav-smooth-link group px-6 py-3 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 shadow-lg">
+                    <div class="animate-slide-down-4 flex flex-wrap items-center justify-center gap-3">
+                        <a href="#visual-led" class="glow-border-card nav-smooth-link group px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 shadow-lg">
                             <span>Explore Showreel</span>
                             <i data-lucide="arrow-down-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5"></i>
                         </a>
-                        <a href="#contact" class="glow-border-card nav-smooth-link px-6 py-3 rounded-xl bg-charcoal/85 backdrop-blur-md hover:bg-graphite border border-slateborder text-platinum text-xs sm:text-sm font-medium transition-all duration-300 hover:-translate-y-1">
+                        <a href="#contact" class="glow-border-card nav-smooth-link px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-charcoal/85 backdrop-blur-md hover:bg-graphite border border-slateborder text-platinum text-xs sm:text-sm font-medium transition-all duration-300 hover:-translate-y-1">
                             Get in Touch
                         </a>
                     </div>
                 </div>
 
                 <!-- Lower Split Row: "Introduce" on Left & 4 Personal Spec Cards on Right -->
-                <div class="pt-10 sm:pt-12 border-t border-slateborder/60 grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-10 items-center">
+                <div class="pt-8 sm:pt-12 border-t border-slateborder/60 grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-10 items-center">
                     <!-- Left Column: Introduce Heading & Personal Bio -->
                     <div class="xl:col-span-7 page-enter-item" style="--enter-delay: 260ms;">
-                        <div class="mb-4">
-                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1.5">01 / PROFILE OVERVIEW</span>
-                            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-platinum">Introduce</h2>
+                        <div class="mb-3 sm:mb-4">
+                            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">PROFILE OVERVIEW</span>
+                            <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-platinum">Introduce</h2>
                         </div>
-                        <p id="profileBio" data-editable="true" data-field="bio" class="text-sm sm:text-base text-zinc-400 leading-relaxed max-w-4xl">
+                        <p id="profileBio" data-editable="true" data-field="bio" class="text-xs sm:text-base text-zinc-400 leading-relaxed max-w-4xl">
                             I am a visual creator specializing in 3D Modeling, Visual Art, and Motion Graphics. Driven by a deep passion for visual arts and dynamic movement, I constantly explore innovative ways to bring concepts to life by combining 3D environments, lighting, textures, color theory, and animation. My creative direction focuses on crafting aesthetically refined, imaginative, and visually immersive works—with particular enthusiasm for Stage Visual LED, Live Performances, 3D Animation, and Motion Design.
                         </p>
                     </div>
 
                     <!-- Right Column: 4 Personal Spec Cards -->
-                    <div class="xl:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 320ms;">
-                            <div class="w-11 h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
-                                <i data-lucide="calendar" class="w-5 h-5 text-platinum"></i>
+                    <div class="xl:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 320ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="calendar" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
                             </div>
                             <div>
-                                <span class="block text-[11px] font-mono uppercase tracking-wider text-zinc-500">Birth Year</span>
-                                <span id="profileYear" data-editable="true" data-field="birthYear" class="text-sm sm:text-base font-semibold text-platinum">1999</span>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Birth Year</span>
+                                <span id="profileYear" data-editable="true" data-field="birthYear" class="text-xs sm:text-base font-semibold text-platinum">1999</span>
                             </div>
                         </div>
 
-                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 380ms;">
-                            <div class="w-11 h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-platinum"></i>
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 380ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="map-pin" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
                             </div>
                             <div>
-                                <span class="block text-[11px] font-mono uppercase tracking-wider text-zinc-500">Location</span>
-                                <span id="profileCity" data-editable="true" data-field="city" class="text-sm sm:text-base font-semibold text-platinum">Hanoi, Vietnam</span>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Location</span>
+                                <span id="profileCity" data-editable="true" data-field="city" class="text-xs sm:text-base font-semibold text-platinum">Hanoi, Vietnam</span>
                             </div>
                         </div>
 
-                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 440ms;">
-                            <div class="w-11 h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
-                                <i data-lucide="layers" class="w-5 h-5 text-platinum"></i>
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 440ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="layers" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
                             </div>
                             <div>
-                                <span class="block text-[11px] font-mono uppercase tracking-wider text-zinc-500">Showreel Works</span>
-                                <span id="projectCountBadge" class="text-sm sm:text-base font-semibold text-platinum">12 Projects</span>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Showreel Works</span>
+                                <span id="projectCountBadge" class="text-xs sm:text-base font-semibold text-platinum">12 Projects</span>
                             </div>
                         </div>
 
-                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 500ms;">
-                            <div class="w-11 h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
-                                <i data-lucide="cpu" class="w-5 h-5 text-platinum"></i>
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 500ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="cpu" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
                             </div>
                             <div>
-                                <span class="block text-[11px] font-mono uppercase tracking-wider text-zinc-500">Core Focus</span>
-                                <span class="text-sm sm:text-base font-semibold text-platinum">Visual Led, Motion Graphics, 3D</span>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Core Focus</span>
+                                <span class="text-xs sm:text-base font-semibold text-platinum">Visual Led, Motion Graphics, 3D</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Software & Creative Tools Bar inside Section 01 -->
-                <div class="mt-10 pt-8 border-t border-slateborder/60 page-enter-item" style="--enter-delay: 540ms;">
-                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div class="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-slateborder/60 page-enter-item" style="--enter-delay: 540ms;">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 sm:mb-4">
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">SOFTWARE &amp; CREATIVE TOOLKIT</span>
+                            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500">SOFTWARE &amp; CREATIVE TOOLKIT</span>
                         </div>
-                        <span class="text-[11px] font-mono text-zinc-500">MOTION GRAPHICS • VIDEO EDITING • 3D &amp; TEXTURING</span>
+                        <span class="hidden sm:block text-[11px] font-mono text-zinc-500">MOTION GRAPHICS • VIDEO EDITING • 3D &amp; TEXTURING</span>
                     </div>
 
-                    <div id="toolsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+                    <div id="toolsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                         <!-- Adobe After Effects -->
-                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1">
-                            <div class="w-10 h-10 rounded-xl bg-[#00005B] border border-[#9999FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(153,153,255,0.22)] icon-bounce-hover">
-                                <span class="font-sans text-[15px] font-extrabold tracking-tight text-[#9999FF]">Ae</span>
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00005B] border border-[#9999FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(153,153,255,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#9999FF]">Ae</span>
                             </div>
                             <div class="min-w-0">
-                                <span class="block text-xs sm:text-sm font-semibold text-platinum truncate">After Effects</span>
+                                <span class="block text-xs font-semibold text-platinum truncate">After Effects</span>
                                 <span class="block text-[10px] font-mono text-zinc-500 truncate">Motion &amp; VFX</span>
                             </div>
                         </div>
 
                         <!-- Adobe Premiere Pro -->
-                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1">
-                            <div class="w-10 h-10 rounded-xl bg-[#00005B] border border-[#9999FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(153,153,255,0.22)] icon-bounce-hover">
-                                <span class="font-sans text-[15px] font-extrabold tracking-tight text-[#9999FF]">Pr</span>
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00005B] border border-[#9999FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(153,153,255,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#9999FF]">Pr</span>
                             </div>
                             <div class="min-w-0">
-                                <span class="block text-xs sm:text-sm font-semibold text-platinum truncate">Premiere Pro</span>
+                                <span class="block text-xs font-semibold text-platinum truncate">Premiere Pro</span>
                                 <span class="block text-[10px] font-mono text-zinc-500 truncate">Video Editing</span>
                             </div>
                         </div>
 
                         <!-- Adobe Photoshop -->
-                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1">
-                            <div class="w-10 h-10 rounded-xl bg-[#001E36] border border-[#31A8FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(49,168,255,0.22)] icon-bounce-hover">
-                                <span class="font-sans text-[15px] font-extrabold tracking-tight text-[#31A8FF]">Ps</span>
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#001E36] border border-[#31A8FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(49,168,255,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#31A8FF]">Ps</span>
                             </div>
                             <div class="min-w-0">
-                                <span class="block text-xs sm:text-sm font-semibold text-platinum truncate">Photoshop</span>
+                                <span class="block text-xs font-semibold text-platinum truncate">Photoshop</span>
                                 <span class="block text-[10px] font-mono text-zinc-500 truncate">Visual Design</span>
                             </div>
                         </div>
 
                         <!-- Adobe Illustrator -->
-                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1">
-                            <div class="w-10 h-10 rounded-xl bg-[#330000] border border-[#FF9A00]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(255,154,0,0.22)] icon-bounce-hover">
-                                <span class="font-sans text-[15px] font-extrabold tracking-tight text-[#FF9A00]">Ai</span>
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#330000] border border-[#FF9A00]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(255,154,0,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#FF9A00]">Ai</span>
                             </div>
                             <div class="min-w-0">
-                                <span class="block text-xs sm:text-sm font-semibold text-platinum truncate">Illustrator</span>
-                                <span class="block text-[10px] font-mono text-zinc-500 truncate">Vector &amp; Typography</span>
+                                <span class="block text-xs font-semibold text-platinum truncate">Illustrator</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">Vector Design</span>
                             </div>
                         </div>
 
                         <!-- Blender -->
-                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1">
-                            <div class="w-10 h-10 rounded-xl bg-[#1a120b] border border-[#EA7600]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(234,118,0,0.22)] icon-bounce-hover">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#1a120b] border border-[#EA7600]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(234,118,0,0.22)] icon-bounce-hover">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M12.5 5.5L16.5 8.5M12.5 5.5L8.2 8.8M16.5 8.5H7.2M16.5 8.5C18.8 9.6 20.3 11.9 20.3 14.5C20.3 18.1 17.3 21 13.7 21C10.1 21 7.2 18.1 7.2 14.5C7.2 13.3 7.5 12.2 8.1 11.2L4.2 14.2" stroke="#EA7600" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
                                     <circle cx="13.7" cy="14.5" r="3.4" stroke="#EA7600" stroke-width="2"/>
                                     <circle cx="13.7" cy="14.5" r="1.5" fill="#265787"/>
                                 </svg>
                             </div>
                             <div class="min-w-0">
-                                <span class="block text-xs sm:text-sm font-semibold text-platinum truncate">Blender</span>
+                                <span class="block text-xs font-semibold text-platinum truncate">Blender</span>
                                 <span class="block text-[10px] font-mono text-zinc-500 truncate">3D &amp; Animation</span>
                             </div>
                         </div>
 
                         <!-- Quixel Mixer -->
-                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 hover:-translate-y-1">
-                            <div class="w-10 h-10 rounded-xl bg-[#071921] border border-[#00A8E8]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(0,168,232,0.22)] icon-bounce-hover">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#071921] border border-[#00A8E8]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(0,168,232,0.22)] icon-bounce-hover">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <polygon points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5" stroke="#00A8E8" stroke-width="1.9" stroke-linejoin="round"/>
                                     <path d="M8.5 15V9.5L12 13L15.5 9.5V15" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
                             <div class="min-w-0">
-                                <span class="block text-xs sm:text-sm font-semibold text-platinum truncate">Quixel Mixer</span>
+                                <span class="block text-xs font-semibold text-platinum truncate">Quixel Mixer</span>
                                 <span class="block text-[10px] font-mono text-zinc-500 truncate">PBR Texturing</span>
                             </div>
                         </div>
@@ -1203,65 +1209,65 @@
                 </div>
 
                 <!-- Work Experience Timeline inside Section 01 -->
-                <div id="experience" class="mt-12 pt-10 border-t border-slateborder/60 scroll-mt-28 page-enter-item" style="--enter-delay: 640ms;">
-                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                <div id="experience" class="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-slateborder/60 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 640ms;">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
                         <div>
-                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1.5">CAREER TIMELINE</span>
-                            <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-platinum">Work Experience</h3>
+                            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">CAREER TIMELINE</span>
+                            <h3 class="text-xl sm:text-3xl font-bold tracking-tight text-platinum">Work Experience</h3>
                         </div>
 
-                        <div class="flex flex-wrap items-center gap-3">
-                            <span class="px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
                                 VISUAL STAGE • MOTION DESIGN • 3D CGI
                             </span>
 
-                            <button id="addExperienceBtn" onclick="openExperienceModal()" class="hidden px-4 py-2.5 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-md">
-                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            <button id="addExperienceBtn" onclick="openExperienceModal()" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
                                 Add Experience
                             </button>
                         </div>
                     </div>
 
-                    <div id="experienceList" class="space-y-4"></div>
+                    <div id="experienceList" class="space-y-3.5"></div>
                 </div>
             </div>
         </section>
 
         <!-- Staggered Divider 01 -> 02 -->
-        <div class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28" aria-hidden="true">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
             <div class="section-luminous-divider">
                 <span class="divider-beam divider-beam-ltr" style="animation-delay: 0s;"></span>
             </div>
         </div>
 
         <!-- SECTION 02: VISUAL LED SHOWREEL (CAROUSEL) -->
-        <section id="visual-led" class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28 scroll-mt-28 page-enter-item" style="--enter-delay: 720ms;">
+        <section id="visual-led" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 720ms;">
             <div class="reveal active">
                 <!-- Section Header & Filter Tabs -->
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-5 sm:mb-6">
                     <div>
-                        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-2">02 / PORTFOLIO SHOWREEL</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-platinum">Visual Led</h2>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1 sm:mb-2">02 / PORTFOLIO SHOWREEL</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-platinum">Visual Led</h2>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex flex-wrap items-center gap-2.5">
                         <!-- Filter Buttons -->
                         <div class="inline-flex p-1 rounded-xl bg-charcoal border border-slateborder">
-                            <button onclick="filterProjects('all')" data-filter="all" class="filter-btn active px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all bg-graphite text-platinum shadow">
+                            <button onclick="filterProjects('all')" data-filter="all" class="filter-btn active px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium transition-all bg-graphite text-platinum shadow">
                                 All
                             </button>
-                            <button onclick="filterProjects('video')" data-filter="video" class="filter-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:text-platinum transition-all text-silver">
-                                Video Showreel
+                            <button onclick="filterProjects('video')" data-filter="video" class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium hover:text-platinum transition-all text-silver">
+                                Video
                             </button>
-                            <button onclick="filterProjects('image')" data-filter="image" class="filter-btn px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:text-platinum transition-all text-silver">
-                                Stills / Images
+                            <button onclick="filterProjects('image')" data-filter="image" class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium hover:text-platinum transition-all text-silver">
+                                Stills
                             </button>
                         </div>
 
                         <!-- Add New Visual LED Project Button (Visible in Edit Mode) -->
-                        <button id="addProjectBtn" onclick="openProjectModal(null, 'led')" class="hidden px-4 py-2.5 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-4 h-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                            Add Project
+                        <button id="addProjectBtn" onclick="openProjectModal(null, 'led')" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            Add
                         </button>
                     </div>
                 </div>
@@ -1274,31 +1280,31 @@
         </section>
 
         <!-- Staggered Divider 02 -> 03 -->
-        <div class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28" aria-hidden="true">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
             <div class="section-luminous-divider">
                 <span class="divider-beam divider-beam-rtl" style="animation-delay: -1.6s;"></span>
             </div>
         </div>
 
         <!-- SECTION 03: MOTION GRAPHICS SHOWREEL (CAROUSEL) -->
-        <section id="motion-graphics" class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28 scroll-mt-28 page-enter-item" style="--enter-delay: 800ms;">
+        <section id="motion-graphics" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 800ms;">
             <div class="reveal active">
                 <!-- Section Header -->
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-5 sm:mb-6">
                     <div>
-                        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-2">03 / MOTION SHOWREEL</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-platinum">Motion Graphics</h2>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1 sm:mb-2">03 / MOTION SHOWREEL</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-platinum">Motion Graphics</h2>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-3">
-                        <span class="px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
-                            2D / 3D MOTION • BRAND IDENT • TITLE SEQUENCE
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <span class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
+                            2D / 3D MOTION • BRAND IDENT
                         </span>
 
                         <!-- Add New Motion Graphics Video Button (Visible in Edit Mode) -->
-                        <button id="addMotionBtn" onclick="openProjectModal(null, 'motion')" class="hidden px-4 py-2.5 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-4 h-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                            Add Motion Video
+                        <button id="addMotionBtn" onclick="openProjectModal(null, 'motion')" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            Add
                         </button>
                     </div>
                 </div>
@@ -1311,31 +1317,31 @@
         </section>
 
         <!-- Staggered Divider 03 -> 04 -->
-        <div class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28" aria-hidden="true">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
             <div class="section-luminous-divider">
                 <span class="divider-beam divider-beam-ltr" style="animation-delay: -3.2s;"></span>
             </div>
         </div>
 
         <!-- SECTION 04: 3D MODEL / CGI SHOWREEL (CAROUSEL) -->
-        <section id="three-d-cgi" class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28 scroll-mt-28 page-enter-item" style="--enter-delay: 880ms;">
+        <section id="three-d-cgi" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 880ms;">
             <div class="reveal active">
                 <!-- Section Header -->
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-5 sm:mb-6">
                     <div>
-                        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-2">04 / 3D &amp; CGI SHOWREEL</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-platinum">3D Model / CGI</h2>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1 sm:mb-2">04 / 3D &amp; CGI SHOWREEL</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-platinum">3D Model / CGI</h2>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-3">
-                        <span class="px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
-                            HARD-SURFACE • PRODUCT CGI • UNREAL / C4D
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <span class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
+                            HARD-SURFACE • PRODUCT CGI
                         </span>
 
                         <!-- Add New 3D / CGI Project Button (Visible in Edit Mode) -->
-                        <button id="addThreeDBtn" onclick="openProjectModal(null, 'threeD')" class="hidden px-4 py-2.5 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-4 h-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                            Add 3D / CGI
+                        <button id="addThreeDBtn" onclick="openProjectModal(null, 'threeD')" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            Add
                         </button>
                     </div>
                 </div>
@@ -1348,23 +1354,23 @@
         </section>
 
         <!-- Staggered Divider 04 -> 05 -->
-        <div class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 mb-20 sm:mb-28" aria-hidden="true">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
             <div class="section-luminous-divider">
                 <span class="divider-beam divider-beam-rtl" style="animation-delay: -4.8s;"></span>
             </div>
         </div>
 
         <!-- SECTION 05: CONTACT & SOCIAL MEDIA SECTION -->
-        <section id="contact" class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 scroll-mt-28 page-enter-item" style="--enter-delay: 960ms;">
-            <div class="reveal bg-gradient-to-b from-charcoal to-obsidian border border-slateborder rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden active">
+        <section id="contact" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 960ms;">
+            <div class="reveal bg-gradient-to-b from-charcoal to-obsidian border border-slateborder rounded-3xl p-5 sm:p-10 lg:p-12 relative overflow-hidden active">
                 <!-- Decorative Subtle Corner Light -->
                 <div class="absolute -top-24 -right-24 w-64 h-64 bg-zinc-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
                 <!-- Header Row -->
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 mb-8 border-b border-slateborder/70 relative z-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 pb-5 sm:pb-6 mb-6 sm:mb-8 border-b border-slateborder/70 relative z-10">
                     <div>
-                        <span class="text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1.5">05 / CONNECT &amp; COLLABORATE</span>
-                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-platinum">Get in Touch</h2>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">05 / CONNECT &amp; COLLABORATE</span>
+                        <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-platinum">Get in Touch</h2>
                     </div>
                     <p class="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed">
                         Available for freelance and full-time collaborations in Stage Visual LED, Motion Graphics, and 3D Modeling / CGI.
@@ -1372,11 +1378,11 @@
                 </div>
 
                 <!-- Full-Width 4-Column Contact & Social Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 relative z-10">
                     <!-- Gmail Card -->
-                    <div class="glow-border-card group bg-obsidian/90 border border-slateborder rounded-2xl p-4 flex items-center justify-between gap-3 hover:border-zinc-600 transition-all duration-300 hover:-translate-y-0.5">
+                    <div class="glow-border-card group bg-obsidian/90 border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 hover:border-zinc-600 transition-all duration-300 hover:-translate-y-0.5">
                         <div class="flex items-center gap-3 min-w-0">
-                            <div class="w-10 h-10 rounded-xl bg-graphite border border-slateborder flex items-center justify-center text-platinum shrink-0 icon-bounce-hover">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-graphite border border-slateborder flex items-center justify-center text-platinum shrink-0 icon-bounce-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" aria-hidden="true" class="lucide lucide-mail w-4 h-4"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
                             </div>
                             <div class="min-w-0">
@@ -1392,9 +1398,9 @@
                     </div>
 
                     <!-- Phone Card -->
-                    <div class="glow-border-card group bg-obsidian/90 border border-slateborder rounded-2xl p-4 flex items-center justify-between gap-3 hover:border-zinc-600 transition-all duration-300 hover:-translate-y-0.5">
+                    <div class="glow-border-card group bg-obsidian/90 border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 hover:border-zinc-600 transition-all duration-300 hover:-translate-y-0.5">
                         <div class="flex items-center gap-3 min-w-0">
-                            <div class="w-10 h-10 rounded-xl bg-graphite border border-slateborder flex items-center justify-center text-platinum shrink-0 icon-bounce-hover">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-graphite border border-slateborder flex items-center justify-center text-platinum shrink-0 icon-bounce-hover">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
                             </div>
                             <div class="min-w-0">
@@ -1410,9 +1416,9 @@
                     </div>
 
                     <!-- Facebook -->
-                    <a id="socialFacebookLink" href="https://www.facebook.com/hoangcong.le.99/" target="_blank" rel="noopener noreferrer" class="glow-border-card group flex items-center justify-between px-4 py-4 rounded-2xl bg-graphite/80 hover:bg-zinc-800 border border-slateborder hover:border-zinc-500 transition-all duration-300 hover:-translate-y-0.5">
+                    <a id="socialFacebookLink" href="https://www.facebook.com/hoangcong.le.99/" target="_blank" rel="noopener noreferrer" class="glow-border-card group flex items-center justify-between px-3.5 sm:px-4 py-3.5 sm:py-4 rounded-2xl bg-graphite/80 hover:bg-zinc-800 border border-slateborder hover:border-zinc-500 transition-all duration-300 hover:-translate-y-0.5">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-obsidian border border-slateborder flex items-center justify-center shrink-0 icon-bounce-hover">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-obsidian border border-slateborder flex items-center justify-center shrink-0 icon-bounce-hover">
                                 <svg class="w-4 h-4 text-silver group-hover:text-white transition-colors fill-current" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
                                 </svg>
@@ -1426,9 +1432,9 @@
                     </a>
 
                     <!-- LinkedIn -->
-                    <a id="socialLinkedinLink" href="https://www.linkedin.com/in/hoang262" target="_blank" rel="noopener noreferrer" class="glow-border-card group flex items-center justify-between px-4 py-4 rounded-2xl bg-graphite/80 hover:bg-zinc-800 border border-slateborder hover:border-zinc-500 transition-all duration-300 hover:-translate-y-0.5">
+                    <a id="socialLinkedinLink" href="https://www.linkedin.com/in/hoang262" target="_blank" rel="noopener noreferrer" class="glow-border-card group flex items-center justify-between px-3.5 sm:px-4 py-3.5 sm:py-4 rounded-2xl bg-graphite/80 hover:bg-zinc-800 border border-slateborder hover:border-zinc-500 transition-all duration-300 hover:-translate-y-0.5">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-obsidian border border-slateborder flex items-center justify-center shrink-0 icon-bounce-hover">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-obsidian border border-slateborder flex items-center justify-center shrink-0 icon-bounce-hover">
                                 <svg class="w-4 h-4 text-silver group-hover:text-white transition-colors fill-current" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
                                 </svg>
@@ -1463,8 +1469,8 @@
 
     <!-- FOOTER -->
     <footer class="relative z-10 border-t border-slateborder/70 bg-obsidian/90 backdrop-blur-md">
-        <div class="w-full px-5 sm:px-10 lg:px-14 xl:px-20 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-            <div class="flex items-center gap-2">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 py-6 sm:py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 text-center sm:text-left">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                 <span class="font-mono text-platinum font-semibold" id="footerName">LE CONG HOANG</span>
                 <span>•</span>
                 <span>Visual LED &amp; 3D Motion Showreel</span>
@@ -2979,6 +2985,14 @@
                 document.querySelectorAll('.page-enter-item').forEach((el) => {
                     el.classList.add('is-entered');
                 });
+            });
+
+            // Secret keyboard shortcut (Ctrl + Shift + E) for owner to toggle edit mode
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.code === 'KeyE') {
+                    e.preventDefault();
+                    toggleEditMode();
+                }
             });
 
             const reveals = document.querySelectorAll('.reveal');
