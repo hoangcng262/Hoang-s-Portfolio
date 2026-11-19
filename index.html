@@ -1022,9 +1022,9 @@
                 <a href="#contact" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Contact</a>
             </nav>
 
-            <!-- Action Controls (Hidden Edit Trigger for Owner Only) -->
+            <!-- Action Controls (Edit Trigger) -->
             <div class="flex items-center gap-2">
-                <button id="toggleEditBtn" onclick="toggleEditMode()" class="hidden group px-3 py-2 rounded-xl text-xs font-medium border border-slateborder bg-charcoal/90 hover:bg-graphite text-platinum transition-all items-center gap-1.5 shadow-sm">
+                <button id="toggleEditBtn" onclick="toggleEditMode()" class="group px-3.5 py-2 rounded-xl text-xs font-medium border border-slateborder bg-charcoal/90 hover:bg-graphite text-platinum transition-all flex items-center gap-1.5 shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-3" aria-hidden="true" class="lucide lucide-edit-3 w-3.5 h-3.5 text-silver icon-bounce-hover"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
                     <span id="toggleEditText">Edit</span>
                 </button>
@@ -1488,18 +1488,57 @@
                     <span id="lightboxBadge" class="px-2.5 py-1 rounded-lg bg-graphite border border-slateborder text-[11px] font-mono uppercase text-platinum shrink-0">ALBUM</span>
                     <h3 id="lightboxTitle" class="text-sm sm:text-base font-semibold text-platinum truncate">Project Preview</h3>
                 </div>
-                <button onclick="closeLightbox()" title="Close" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white transition shrink-0">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
+                <div class="flex items-center gap-2">
+                    <!-- Add Image/Video directly to current Album button (visible in Edit Mode) -->
+                    <button id="lightboxAddMediaBtn" onclick="openAddMediaToCurrentAlbum()" class="hidden px-3 py-1.5 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition items-center gap-1.5 shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                        <span>Add Media</span>
+                    </button>
+                    <button onclick="closeLightbox()" title="Close" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white transition shrink-0">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Scrollable Vertical Media Stream -->
             <div id="lightboxMediaContainer" class="bg-black overflow-y-auto flex-1"></div>
 
             <!-- Description Footer -->
-            <div class="px-6 py-4 bg-charcoal border-t border-slateborder shrink-0">
+            <div class="px-6 py-4 bg-charcoal border-t border-slateborder shrink-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <p id="lightboxDesc" class="text-sm text-silver leading-relaxed"></p>
+                <span id="lightboxSlideCounter" class="text-xs font-mono text-zinc-500 shrink-0"></span>
             </div>
+        </div>
+    </div>
+
+    <!-- QUICK ADD MEDIA TO LIGHTBOX ALBUM MODAL -->
+    <div id="quickAddMediaModal" class="hidden fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-charcoal border border-slateborder rounded-3xl p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-bold text-platinum">Add Photos or Videos to Album</h3>
+                <button onclick="closeQuickAddMediaModal()" class="p-1.5 rounded-xl bg-graphite text-silver hover:text-white transition">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <form id="quickAddMediaForm" onsubmit="handleQuickAddMediaSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1">Upload Multiple Files From Device</label>
+                    <input id="quickBatchFiles" type="file" multiple accept="image/*,video/*" class="w-full text-xs text-silver file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-graphite file:text-platinum cursor-pointer">
+                    <p class="text-[10px] text-zinc-500 mt-1">You can select multiple images or videos simultaneously.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1">Or Single Media URL</label>
+                    <input id="quickMediaUrl" type="url" placeholder="https://..." class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-slateborder text-xs text-platinum focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1">Caption (Optional)</label>
+                    <input id="quickMediaCaption" type="text" placeholder="e.g. Stage Render Angle B" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-slateborder text-xs text-platinum focus:outline-none">
+                </div>
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeQuickAddMediaModal()" class="px-4 py-2 rounded-xl bg-graphite text-xs text-silver hover:text-white transition">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-platinum text-obsidian text-xs font-semibold hover:bg-white transition">Add to Album</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -1542,27 +1581,30 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Cover Image / Video URL</label>
-                    <input id="projUrl" type="url" placeholder="https://..." class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Or upload cover file from your device</label>
-                    <input id="projFile" type="file" accept="image/*,video/*" onchange="handleFileUpload(event)" class="w-full text-xs text-silver file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-graphite file:text-platinum hover:file:bg-zinc-700 cursor-pointer">
-                    <p id="fileUploadStatus" class="text-[11px] text-emerald-400 mt-1 hidden">File selected from device!</p>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Upload Cover File from Device *</label>
+                    <input id="projFile" type="file" accept="image/*,video/*" required onchange="handleFileUpload(event)" class="w-full text-xs text-silver file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-graphite file:text-platinum hover:file:bg-zinc-700 cursor-pointer">
+                    <input type="hidden" id="projUrl">
+                    <p id="fileUploadStatus" class="text-[11px] text-emerald-400 mt-1 hidden">Cover file selected successfully!</p>
                 </div>
 
                 <!-- Album Items Manager (Only for Visual LED Section 02) -->
                 <div id="albumItemsWrapper" class="hidden pt-2 border-t border-slateborder/80 space-y-3">
                     <div class="flex items-center justify-between">
-                        <label class="block text-xs font-mono uppercase text-platinum">Album Media Items (Separate Slides)</label>
+                        <label class="block text-xs font-mono uppercase text-platinum">Album Media Items (Multiple Files & Reorder)</label>
                         <span id="albumItemCountLabel" class="text-[11px] font-mono text-zinc-400">0 items</span>
                     </div>
 
-                    <div id="albumItemsEditorList" class="space-y-2 max-h-40 overflow-y-auto pr-1"></div>
+                    <div id="albumItemsEditorList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
 
                     <div class="p-3 rounded-2xl bg-obsidian/90 border border-slateborder space-y-2.5">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-mono text-silver">Batch Upload Multiple Files</span>
+                            <label class="px-3 py-1.5 rounded-xl bg-platinum hover:bg-white text-obsidian text-xs font-semibold cursor-pointer transition">
+                                + Select Multiple Files
+                                <input type="file" multiple accept="image/*,video/*" onchange="handleBatchAlbumFileUpload(event)" class="hidden">
+                            </label>
+                        </div>
+                        <div class="border-t border-slateborder/60 pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <select id="newAlbumItemType" class="px-3 py-2 rounded-xl bg-charcoal border border-slateborder text-xs text-platinum focus:outline-none">
                                 <option value="image">Image</option>
                                 <option value="video">Video</option>
@@ -1572,7 +1614,7 @@
                         <div class="flex flex-col sm:flex-row gap-2">
                             <input id="newAlbumItemUrl" type="url" placeholder="Paste image/video URL..." class="flex-1 px-3 py-2 rounded-xl bg-charcoal border border-slateborder text-xs text-platinum focus:outline-none">
                             <label class="px-3 py-2 rounded-xl bg-graphite hover:bg-zinc-700 border border-slateborder text-xs font-medium text-platinum cursor-pointer text-center shrink-0 transition">
-                                Upload
+                                Single Upload
                                 <input type="file" accept="image/*,video/*" onchange="handleAlbumItemFileUpload(event)" class="hidden">
                             </label>
                             <button type="button" onclick="addAlbumItemToDraft()" class="px-3.5 py-2 rounded-xl bg-platinum hover:bg-white text-obsidian text-xs font-semibold shrink-0 transition">
@@ -1737,7 +1779,8 @@
                         fallbackImg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
                         desc: 'Audio-reactive wireframe structures and kinetic strobe visuals synchronized via SMPTE timecode.',
                         items: [
-                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-futuristic-devices-99786-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80', caption: 'Drop Visual Loop — Arena Center Screen' }
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-futuristic-devices-99786-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80', caption: 'Drop Visual Loop — Arena Center Screen' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80', caption: 'Stage Rehearsal & SMPTE Setup' }
                         ]
                     },
                     {
@@ -1748,7 +1791,8 @@
                         fallbackImg: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80',
                         desc: 'Architectural 3D projection mapping and depth-illusion visuals for festival mainstage.',
                         items: [
-                            { type: 'image', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80', caption: 'Stage Perspective Concept Render' }
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80', caption: 'Stage Perspective Concept Render' },
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80', caption: 'Mapping Surface Calibration Test' }
                         ]
                     },
                     {
@@ -1772,7 +1816,11 @@
                         specs: '4K 60FPS • 16:9',
                         url: 'https://assets.mixkit.co/videos/preview/mixkit-futuristic-tunnel-of-blue-lights-34469-large.mp4',
                         fallbackImg: 'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=1200&q=80',
-                        desc: 'High-energy kinetic typography and chromatic aberration transitions built in After Effects.'
+                        desc: 'High-energy kinetic typography and chromatic aberration transitions built in After Effects.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-futuristic-tunnel-of-blue-lights-34469-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=1200&q=80', caption: 'Full Opener Animation Sequence' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=80', caption: 'Typography Storyboard & Grid Layout' }
+                        ]
                     },
                     {
                         id: 'mot-2',
@@ -1782,7 +1830,11 @@
                         specs: '4K 60FPS • 16:9',
                         url: 'https://assets.mixkit.co/videos/preview/mixkit-liquid-metal-waves-31622-large.mp4',
                         fallbackImg: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=1200&q=80',
-                        desc: 'Liquid metallic shaders and sleek logo reveal for digital entertainment network.'
+                        desc: 'Liquid metallic shaders and sleek logo reveal for digital entertainment network.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-liquid-metal-waves-31622-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=1200&q=80', caption: 'Logo Reveal Ident' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80', caption: 'Shader Development & Reflection Study' }
+                        ]
                     },
                     {
                         id: 'mot-3',
@@ -1792,7 +1844,10 @@
                         specs: '4K 60FPS • 16:9',
                         url: 'https://assets.mixkit.co/videos/preview/mixkit-blue-and-purple-abstract-waves-41615-large.mp4',
                         fallbackImg: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80',
-                        desc: 'Complete lower-thirds, transition stingers, and HUD motion toolkit for live esports broadcast.'
+                        desc: 'Complete lower-thirds, transition stingers, and HUD motion toolkit for live esports broadcast.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-blue-and-purple-abstract-waves-41615-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80', caption: 'Broadcast Transition Stinger' }
+                        ]
                     },
                     {
                         id: 'mot-4',
@@ -1802,7 +1857,10 @@
                         specs: '4K 60FPS • 16:9',
                         url: 'https://assets.mixkit.co/videos/preview/mixkit-glowing-particles-floating-in-the-dark-34592-large.mp4',
                         fallbackImg: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=1200&q=80',
-                        desc: 'Frequency-driven particle displacement and glow compositing in After Effects.'
+                        desc: 'Frequency-driven particle displacement and glow compositing in After Effects.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-glowing-particles-floating-in-the-dark-34592-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=1200&q=80', caption: 'Audio Reactive Loop' }
+                        ]
                     }
                 ],
                 threeD: [
@@ -1814,7 +1872,11 @@
                         specs: 'Blender Cycles • 4K',
                         url: 'https://assets.mixkit.co/videos/preview/mixkit-3d-animation-of-a-futuristic-sphere-34594-large.mp4',
                         fallbackImg: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80',
-                        desc: 'Procedural hard-surface modeling, PBR metallic texturing in Quixel Mixer, and Cycles rendering.'
+                        desc: 'Procedural hard-surface modeling, PBR metallic texturing in Quixel Mixer, and Cycles rendering.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-3d-animation-of-a-futuristic-sphere-34594-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80', caption: '3D Turntable Animation' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80', caption: 'Wireframe & Clay Render Breakdown' }
+                        ]
                     },
                     {
                         id: '3d-2',
@@ -1824,7 +1886,11 @@
                         specs: 'Blender • Quixel Mixer',
                         url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
                         fallbackImg: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
-                        desc: 'Studio rim-lighting exploration and custom micro-surface roughness maps for flagship hardware.'
+                        desc: 'Studio rim-lighting exploration and custom micro-surface roughness maps for flagship hardware.',
+                        items: [
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80', caption: 'Studio Product Shot' },
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-digital-waves-34474-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=80', caption: 'Material Texture Breakdown' }
+                        ]
                     },
                     {
                         id: '3d-3',
@@ -1834,7 +1900,10 @@
                         specs: 'Blender • Volumetrics',
                         url: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80',
                         fallbackImg: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80',
-                        desc: 'Sci-fi architectural environment study featuring wet asphalt reflections and volumetric fog.'
+                        desc: 'Sci-fi architectural environment study featuring wet asphalt reflections and volumetric fog.',
+                        items: [
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80', caption: 'Environment Wide Render' }
+                        ]
                     },
                     {
                         id: '3d-4',
@@ -1844,7 +1913,10 @@
                         specs: '4K 60FPS • Cycles',
                         url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-digital-waves-34474-large.mp4',
                         fallbackImg: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=80',
-                        desc: 'Dynamic camera choreography and macro shader detailing for tech launch commercial.'
+                        desc: 'Dynamic camera choreography and macro shader detailing for tech launch commercial.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-digital-waves-34474-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=80', caption: 'Commercial Full Render' }
+                        ]
                     }
                 ]
             }
@@ -1854,7 +1926,7 @@
         let isEditMode = false;
         let currentLedFilter = 'all';
         let draftAlbumItems = [];
-        let typewriterTimer = null;
+        let activeLightboxProjectRef = null;
 
         function loadPortfolioData() {
             try {
@@ -1882,6 +1954,48 @@
                 console.warn('Could not persist to localStorage:', err);
             }
             updateProjectCountBadge();
+        }
+
+        function saveAllPortfolioProgress() {
+            // Collect any live inline edits before saving
+            document.querySelectorAll('[data-editable="true"]').forEach(el => {
+                const field = el.dataset.field;
+                if (field && portfolioData.profile[field] !== undefined) {
+                    portfolioData.profile[field] = el.textContent.trim();
+                }
+            });
+            savePortfolioData();
+
+            // Export standalone HTML file with current modified portfolioData baked into DEFAULT_DATA
+            try {
+                const htmlContent = document.documentElement.outerHTML;
+                
+                // Deep clean/clone portfolio data ensuring all fallback images, album thumbnails and slide structures are preserved
+                const cleanExportData = JSON.parse(JSON.stringify(portfolioData));
+
+                // Replace the default data declaration block inside the cloned HTML string
+                const targetScriptRegex = /const DEFAULT_DATA = \{[\s\S]*?\};\n\s*let portfolioData/;
+                const updatedPortfolioString = `const DEFAULT_DATA = ${JSON.stringify(cleanExportData, null, 4)};\n        let portfolioData`;
+                
+                let standaloneHtml = htmlContent;
+                if (targetScriptRegex.test(htmlContent)) {
+                    standaloneHtml = htmlContent.replace(targetScriptRegex, updatedPortfolioString);
+                }
+
+                const blob = new Blob([`<!DOCTYPE html>\n<html lang="en">` + standaloneHtml.split('</html>')[0] + `</html>`], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'index.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(url), 2000);
+            } catch (err) {
+                console.error('Export download error:', err);
+            }
+
+            showToast('All changes saved & updated HTML downloaded with complete thumbnails!');
         }
 
         function showToast(message) {
@@ -2161,9 +2275,8 @@
 
         function buildProjectCardHTML(project, sectionKey, idx = 0) {
             const isVideo = project.type === 'video';
-            const badgeText = sectionKey === 'led'
-                ? (project.items && project.items.length > 1 ? `ALBUM • ${project.items.length}` : (isVideo ? 'LED VIDEO' : 'STAGE STILL'))
-                : (project.category || (sectionKey === 'motion' ? 'MOTION' : '3D / CGI'));
+            const slideCount = Array.isArray(project.items) && project.items.length > 0 ? project.items.length : 1;
+            const badgeText = slideCount > 1 ? `ALBUM • ${slideCount}` : (isVideo ? 'VIDEO' : 'STILL');
             const subTag = project.specs || (isVideo ? '60FPS • LOOP' : '4K RENDER');
             const fallbackSrc = escapeHtml(getProjectFallbackImg(project, idx));
 
@@ -2191,7 +2304,7 @@
                                 </button>
                             </div>
                             <div class="absolute bottom-3 right-3 z-[3] w-9 h-9 rounded-xl bg-platinum/90 text-obsidian flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
-                                <i data-lucide="${isVideo ? 'play' : 'maximize-2'}" class="w-4 h-4"></i>
+                                <i data-lucide="layers" class="w-4 h-4"></i>
                             </div>
                         </div>
                         <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
@@ -2489,6 +2602,7 @@
             const project = list.find(p => p.id === projectId);
             if (!project) return;
 
+            activeLightboxProjectRef = { sectionKey, projectId };
             isLightboxClosing = false;
             const sourceCard = findVisibleAlbumCard(sectionKey, projectId, sourceEl);
             activeLightboxSource = { sectionKey, projectId, el: sourceCard };
@@ -2499,6 +2613,13 @@
             const title = document.getElementById('lightboxTitle');
             const desc = document.getElementById('lightboxDesc');
             const container = document.getElementById('lightboxMediaContainer');
+            const counter = document.getElementById('lightboxSlideCounter');
+            const addMediaBtn = document.getElementById('lightboxAddMediaBtn');
+
+            if (addMediaBtn) {
+                addMediaBtn.classList.toggle('hidden', !isEditMode);
+                addMediaBtn.style.display = isEditMode ? 'inline-flex' : 'none';
+            }
 
             const sectionNames = { led: 'VISUAL LED', motion: 'MOTION GRAPHICS', threeD: '3D / CGI' };
             badge.textContent = sectionNames[sectionKey] || 'SHOWREEL';
@@ -2509,16 +2630,24 @@
                 ? project.items
                 : [{ type: project.type, url: project.url, fallbackImg: project.fallbackImg, caption: project.title }];
 
+            if (counter) counter.textContent = `${slides.length} slide${slides.length === 1 ? '' : 's'}`;
+
             container.innerHTML = slides.map((item, idx) => {
                 const fallbackSrc = escapeHtml(item.fallbackImg || getProjectFallbackImg(project, idx));
                 const mediaEl = item.type === 'video'
-                    ? `<video src="${escapeHtml(item.url)}" poster="${fallbackSrc}" data-title="${escapeHtml(item.caption || project.title)}" controls autoplay loop playsinline onerror="handleVideoMediaError(this, '${fallbackSrc}')" class="w-full max-h-[68vh] object-contain mx-auto bg-black"></video>`
-                    : `<img src="${escapeHtml(item.url)}" alt="${escapeHtml(item.caption || project.title)}" onerror="this.onerror=null;this.src='${fallbackSrc}'" class="w-full max-h-[68vh] object-contain mx-auto bg-black">`;
-                const captionEl = item.caption
-                    ? `<div class="px-6 py-2.5 bg-obsidian/90 border-t border-slateborder/60 text-xs font-mono text-silver">${escapeHtml(item.caption)}</div>`
+                    ? `<video src="${escapeHtml(item.url)}" poster="${fallbackSrc}" data-title="${escapeHtml(project.title)}" controls autoplay loop playsinline onerror="handleVideoMediaError(this, '${fallbackSrc}')" class="w-full max-h-[68vh] object-contain mx-auto bg-black"></video>`
+                    : `<img src="${escapeHtml(item.url)}" alt="${escapeHtml(project.title)}" onerror="this.onerror=null;this.src='${fallbackSrc}'" class="w-full max-h-[68vh] object-contain mx-auto bg-black">`;
+                
+                const deleteSlideBtn = isEditMode && slides.length > 1
+                    ? `<button onclick="deleteAlbumSlide('${sectionKey}', '${projectId}', ${idx})" class="px-2.5 py-1 rounded-lg bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-800/60 text-xs font-mono transition flex items-center gap-1 shadow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>Delete Slide</button>`
                     : '';
+
+                const actionToolbar = isEditMode
+                    ? `<div class="px-6 py-2.5 bg-obsidian/90 border-t border-slateborder/60 text-xs font-mono text-silver flex items-center justify-between gap-2"><span>Slide ${idx + 1}/${slides.length}</span>${deleteSlideBtn}</div>`
+                    : '';
+
                 const delay = `${90 + idx * 85}ms`;
-                return `<div class="lightbox-slide-item border-b border-slateborder/50 last:border-b-0" style="--slide-delay: ${delay};">${mediaEl}${captionEl}</div>`;
+                return `<div class="lightbox-slide-item bg-charcoal/40 border border-slateborder/80 rounded-2xl overflow-hidden shadow-xl mb-6 last:mb-0" style="--slide-delay: ${delay};">${mediaEl}${actionToolbar}</div>`;
             }).join('');
 
             // Set initial FLIP morph state from the clicked album card
@@ -2543,6 +2672,71 @@
                 panel.style.opacity = '1';
                 panel.style.transform = 'translate3d(0, 0, 0) scale(1)';
             });
+        }
+
+        function openAddMediaToCurrentAlbum() {
+            const urlInput = document.getElementById('quickMediaUrl');
+            const captionInput = document.getElementById('quickMediaCaption');
+            const typeInput = document.getElementById('quickMediaType');
+            if (urlInput) urlInput.value = '';
+            if (captionInput) captionInput.value = '';
+            if (typeInput) typeInput.value = 'image';
+            document.getElementById('quickAddMediaModal')?.classList.remove('hidden');
+        }
+
+        function closeQuickAddMediaModal() {
+            document.getElementById('quickAddMediaModal')?.classList.add('hidden');
+        }
+
+        function handleQuickMediaFileUpload(e) {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const objectUrl = URL.createObjectURL(file);
+            document.getElementById('quickMediaUrl').value = objectUrl;
+            document.getElementById('quickMediaType').value = file.type.startsWith('video') ? 'video' : 'image';
+        }
+
+        function handleQuickAddMediaSubmit(e) {
+            e.preventDefault();
+            if (!activeLightboxProjectRef) return;
+            const { sectionKey, projectId } = activeLightboxProjectRef;
+            const list = portfolioData.projects[sectionKey] || [];
+            const proj = list.find(p => p.id === projectId);
+            if (!proj) return;
+
+            const batchInput = document.getElementById('quickBatchFiles');
+            const urlInput = document.getElementById('quickMediaUrl').value.trim();
+            const captionInput = document.getElementById('quickMediaCaption').value.trim();
+
+            if (!Array.isArray(proj.items)) {
+                proj.items = [{ type: proj.type, url: proj.url, fallbackImg: proj.fallbackImg, caption: proj.title }];
+            }
+
+            let addedCount = 0;
+            if (batchInput && batchInput.files && batchInput.files.length > 0) {
+                Array.from(batchInput.files).forEach(file => {
+                    const objectUrl = URL.createObjectURL(file);
+                    const type = file.type.startsWith('video') ? 'video' : 'image';
+                    proj.items.push({ type, url: objectUrl, fallbackImg: objectUrl, caption: file.name });
+                    addedCount++;
+                });
+            } else if (urlInput) {
+                const type = urlInput.endsWith('.mp4') || urlInput.endsWith('.webm') ? 'video' : 'image';
+                proj.items.push({ type, url: urlInput, fallbackImg: urlInput, caption: captionInput });
+                addedCount++;
+            }
+
+            if (addedCount === 0) {
+                showToast('Please select files or enter a URL');
+                return;
+            }
+
+            savePortfolioData();
+            renderAllSections();
+            closeQuickAddMediaModal();
+
+            openLightbox(sectionKey, projectId, activeLightboxSource?.el);
+            showToast(`Added ${addedCount} media item(s) to album`);
         }
 
         function closeLightbox() {
@@ -2607,18 +2801,16 @@
             const catInput = document.getElementById('projCategory');
             const specsInput = document.getElementById('projSpecs');
             const motionMeta = document.getElementById('motionMetaWrapper');
-            const albumWrap = document.getElementById('albumItemsWrapper');
 
             secInput.value = sectionKey;
             document.getElementById('fileUploadStatus')?.classList.add('hidden');
 
             motionMeta.classList.toggle('hidden', sectionKey === 'led');
-            albumWrap.classList.toggle('hidden', sectionKey !== 'led');
 
             if (projectId) {
                 const proj = (portfolioData.projects[sectionKey] || []).find(p => p.id === projectId);
                 if (!proj) return;
-                heading.textContent = 'Edit Project';
+                heading.textContent = 'Edit Project Album';
                 idInput.value = proj.id;
                 titleInput.value = proj.title || '';
                 typeInput.value = proj.type || 'video';
@@ -2627,8 +2819,11 @@
                 catInput.value = proj.category || '';
                 specsInput.value = proj.specs || '';
                 draftAlbumItems = JSON.parse(JSON.stringify(proj.items || []));
+                if (proj.url) {
+                    document.getElementById('fileUploadStatus')?.classList.remove('hidden');
+                }
             } else {
-                heading.textContent = 'Add Showreel Project';
+                heading.textContent = 'Add Project Album';
                 idInput.value = '';
                 titleInput.value = '';
                 typeInput.value = 'video';
@@ -2663,10 +2858,28 @@
             countLabel.textContent = `${draftAlbumItems.length} item${draftAlbumItems.length === 1 ? '' : 's'}`;
             list.innerHTML = draftAlbumItems.map((item, idx) => `
                 <div class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-obsidian border border-slateborder text-xs">
-                    <span class="truncate text-platinum">[${item.type.toUpperCase()}] ${escapeHtml(item.caption || item.url)}</span>
-                    <button type="button" onclick="removeDraftAlbumItem(${idx})" class="text-red-400 hover:text-red-300 shrink-0">Remove</button>
+                    <span class="truncate text-platinum max-w-[200px] sm:max-w-[280px]">[${item.type.toUpperCase()}] ${escapeHtml(item.caption || item.url)}</span>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button type="button" onclick="moveDraftAlbumItem(${idx}, -1)" ${idx === 0 ? 'disabled class="opacity-30 cursor-not-allowed p-1"' : 'class="p-1 hover:text-white text-silver transition"'} title="Move Up">↑</button>
+                        <button type="button" onclick="moveDraftAlbumItem(${idx}, 1)" ${idx === draftAlbumItems.length - 1 ? 'disabled class="opacity-30 cursor-not-allowed p-1"' : 'class="p-1 hover:text-white text-silver transition"'} title="Move Down">↓</button>
+                        <button type="button" onclick="removeDraftAlbumItem(${idx})" class="px-2 py-1 rounded bg-red-950/80 text-red-300 hover:bg-red-900 transition">Remove</button>
+                    </div>
                 </div>
             `).join('');
+        }
+
+        function deleteAlbumSlide(sectionKey, projectId, slideIdx) {
+            const list = portfolioData.projects[sectionKey] || [];
+            const proj = list.find(p => p.id === projectId);
+            if (!proj || !Array.isArray(proj.items) || proj.items.length <= 1) {
+                showToast('Cannot delete the last remaining slide');
+                return;
+            }
+            proj.items.splice(slideIdx, 1);
+            savePortfolioData();
+            renderAllSections();
+            openLightbox(sectionKey, projectId, activeLightboxSource?.el);
+            showToast('Album slide removed');
         }
 
         function addAlbumItemToDraft() {
@@ -2678,6 +2891,18 @@
             document.getElementById('newAlbumItemCaption').value = '';
             document.getElementById('newAlbumItemUrl').value = '';
             renderDraftAlbumItems();
+        }
+
+        function handleBatchAlbumFileUpload(e) {
+            const files = Array.from(e.target.files || []);
+            if (!files.length) return;
+            files.forEach(file => {
+                const objectUrl = URL.createObjectURL(file);
+                const type = file.type.startsWith('video') ? 'video' : 'image';
+                draftAlbumItems.push({ type, caption: file.name, url: objectUrl });
+            });
+            renderDraftAlbumItems();
+            showToast(`Added ${files.length} files to album`);
         }
 
         function handleAlbumItemFileUpload(e) {
@@ -2693,6 +2918,15 @@
             renderDraftAlbumItems();
         }
 
+        function moveDraftAlbumItem(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= draftAlbumItems.length) return;
+            const temp = draftAlbumItems[idx];
+            draftAlbumItems[idx] = draftAlbumItems[targetIdx];
+            draftAlbumItems[targetIdx] = temp;
+            renderDraftAlbumItems();
+        }
+
         function handleProjectSubmit(e) {
             e.preventDefault();
             const id = document.getElementById('editProjectId').value;
@@ -2704,6 +2938,11 @@
             const category = document.getElementById('projCategory').value.trim();
             const specs = document.getElementById('projSpecs').value.trim();
 
+            // Ensure draft items has at least cover media if empty
+            if (draftAlbumItems.length === 0) {
+                draftAlbumItems.push({ type, url, fallbackImg: url, caption: title });
+            }
+
             const payload = {
                 id: id || `${sectionKey}-${Date.now()}`,
                 title,
@@ -2712,7 +2951,7 @@
                 desc,
                 category,
                 specs,
-                items: sectionKey === 'led' ? draftAlbumItems : undefined
+                items: draftAlbumItems
             };
 
             const arr = portfolioData.projects[sectionKey];
@@ -2726,7 +2965,7 @@
             savePortfolioData();
             renderAllSections();
             closeProjectModal();
-            showToast('Project saved');
+            showToast('Project album saved');
         }
 
         function deleteProject(sectionKey, projectId) {
