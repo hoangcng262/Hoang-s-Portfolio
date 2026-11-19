@@ -1,0 +1,3566 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual LED Artist — Portfolio &amp; Showreel</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: '#010308',
+                        charcoal: '#040916',
+                        graphite: '#081226',
+                        slateborder: '#102042',
+                        silver: '#94a3b8',
+                        platinum: '#f1f5f9',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #010308;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0f1f42;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #172e61;
+        }
+
+        /* Prevent horizontal overflow on mobile */
+        body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* Animated Deep Midnight Dark Blue & Black Gradient Background */
+        .ambient-gradient-bg {
+            background: linear-gradient(
+                -45deg,
+                #010205,
+                #020612,
+                #040c21,
+                #061333,
+                #03091a,
+                #010308
+            );
+            background-size: 380% 380%;
+            animation: gradientFlow 18s ease-in-out infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes orbDriftOne {
+            0%, 100% {
+                transform: translate(-20%, -15%) scale(0.95) rotate(0deg);
+            }
+            50% {
+                transform: translate(22%, 15%) scale(1.22) rotate(12deg);
+            }
+        }
+
+        @keyframes orbDriftTwo {
+            0%, 100% {
+                transform: translate(22%, 15%) scale(1.18) rotate(0deg);
+            }
+            50% {
+                transform: translate(-24%, -18%) scale(0.92) rotate(-14deg);
+            }
+        }
+
+        @keyframes abstractFloatSlow {
+            0%, 100% {
+                transform: translate3d(0px, 0px, 0) rotate(0deg) scale(1);
+                opacity: 0.42;
+                filter: drop-shadow(0 0 8px rgba(15, 39, 92, 0.2)) brightness(0.8);
+            }
+            28% {
+                transform: translate3d(14px, -16px, 0) rotate(2.5deg) scale(1.025);
+                opacity: 0.68;
+                filter: drop-shadow(0 0 20px rgba(29, 78, 216, 0.35)) brightness(1.05);
+            }
+            55% {
+                transform: translate3d(-10px, -24px, 0) rotate(-2deg) scale(1.035);
+                opacity: 0.46;
+                filter: drop-shadow(0 0 10px rgba(15, 39, 92, 0.22)) brightness(0.85);
+            }
+            80% {
+                transform: translate3d(12px, -10px, 0) rotate(1.8deg) scale(1.015);
+                opacity: 0.72;
+                filter: drop-shadow(0 0 24px rgba(37, 99, 235, 0.4)) brightness(1.1);
+            }
+        }
+
+        @keyframes elegantGlowPulse {
+            0%, 100% {
+                opacity: 0.18;
+                transform: scale(1) translate3d(0, 0, 0);
+            }
+            35% {
+                opacity: 0.55;
+                transform: scale(1.08) translate3d(18px, -12px, 0);
+            }
+            65% {
+                opacity: 0.22;
+                transform: scale(0.98) translate3d(-14px, 10px, 0);
+            }
+            85% {
+                opacity: 0.62;
+                transform: scale(1.1) translate3d(10px, -16px, 0);
+            }
+        }
+
+        @keyframes silkWaveGlide {
+            0%, 100% {
+                transform: translate3d(-1.5%, 0px, 0) scaleX(1.02);
+                opacity: 0.38;
+            }
+            50% {
+                transform: translate3d(1.5%, -14px, 0) scaleX(1.05);
+                opacity: 0.68;
+            }
+        }
+
+        .animate-orb-1 {
+            animation: orbDriftOne 14s ease-in-out infinite;
+        }
+
+        .animate-orb-2 {
+            animation: orbDriftTwo 17s ease-in-out infinite;
+        }
+
+        .animate-abstract-float {
+            animation: abstractFloatSlow 15s ease-in-out infinite;
+            will-change: transform, opacity, filter;
+        }
+
+        .animate-elegant-glow {
+            animation: elegantGlowPulse 11s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        .animate-silk-wave {
+            animation: silkWaveGlide 13s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        /* Cyntch-Inspired Architectural Grid, Top Horizon Glow & Traveling Grid Beams */
+        .cyntch-grid-pattern {
+            background-image:
+                linear-gradient(to right, rgba(37, 99, 235, 0.065) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(37, 99, 235, 0.065) 1px, transparent 1px);
+            background-size: 64px 64px;
+            -webkit-mask-image: radial-gradient(ellipse 82% 72% at 50% 28%, #000 35%, transparent 100%);
+            mask-image: radial-gradient(ellipse 82% 72% at 50% 28%, #000 35%, transparent 100%);
+        }
+
+        /* Interactive Illuminated Grid Layer Revealed Around Cursor */
+        .cyntch-grid-interactive {
+            background-image:
+                linear-gradient(to right, rgba(96, 165, 250, 0.28) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(96, 165, 250, 0.28) 1px, transparent 1px);
+            background-size: 64px 64px;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            will-change: mask-image, -webkit-mask-image, opacity;
+        }
+
+        @keyframes cyntchHorizonPulse {
+            0%, 100% {
+                opacity: 0.55;
+                transform: scaleX(1) translateY(0);
+            }
+            50% {
+                opacity: 0.85;
+                transform: scaleX(1.06) translateY(8px);
+            }
+        }
+
+        @keyframes cyntchOrbitSpin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes cyntchOrbitSpinReverse {
+            0% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+
+        .cyntch-orbit-ring-1 {
+            animation: cyntchOrbitSpin 48s linear infinite;
+        }
+
+        .cyntch-orbit-ring-2 {
+            animation: cyntchOrbitSpinReverse 64s linear infinite;
+        }
+
+        @keyframes gridBeamHorizontal {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.95;
+            }
+            85% {
+                opacity: 0.95;
+            }
+            100% {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gridBeamVertical {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.9;
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .cyntch-beam-h {
+            position: absolute;
+            left: 0;
+            height: 1px;
+            width: 220px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.55), rgba(147, 197, 253, 0.65), transparent);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.45);
+            animation: gridBeamHorizontal 11s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .cyntch-beam-v {
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.5), rgba(147, 197, 253, 0.6), transparent);
+            box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+            animation: gridBeamVertical 13s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Smooth Reveal Fade In - Fade Out & Bounce on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px) scale(0.98);
+            transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: opacity, transform;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Soft Bounce & Hover Motion for Icons */
+        @keyframes softIconBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            40% {
+                transform: translateY(-5px) scale(1.08);
+            }
+            70% {
+                transform: translateY(2px) scale(0.97);
+            }
+        }
+
+        /* Light Sweep & Subtle Red Glow for Icons on Hover */
+        @keyframes iconLightSweep {
+            0% {
+                left: -130%;
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                left: 160%;
+                opacity: 0;
+            }
+        }
+
+        .icon-bounce-hover {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        background-color 0.35s ease,
+                        border-color 0.35s ease,
+                        color 0.35s ease,
+                        box-shadow 0.4s ease,
+                        filter 0.35s ease;
+        }
+
+        .icon-bounce-hover::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -130%;
+            width: 65%;
+            height: 140%;
+            background: linear-gradient(
+                105deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.35) 30%,
+                rgba(255, 255, 255, 0.95) 48%,
+                rgba(248, 113, 113, 0.85) 56%,
+                rgba(255, 255, 255, 0.4) 72%,
+                transparent 100%
+            );
+            transform: skewX(-22deg);
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .group:hover .icon-bounce-hover,
+        .icon-bounce-hover:hover {
+            animation: softIconBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            color: #fecaca !important;
+            border-color: rgba(248, 113, 113, 0.85) !important;
+            box-shadow: 0 0 26px rgba(239, 68, 68, 0.55), 0 0 12px rgba(255, 255, 255, 0.3), inset 0 0 14px rgba(248, 113, 113, 0.32);
+            filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.7)) brightness(1.15);
+        }
+
+        .group:hover .icon-bounce-hover,
+        .icon-bounce-hover:hover {
+            animation: softIconBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            color: #fca5a5 !important;
+            border-color: rgba(239, 68, 68, 0.55) !important;
+            box-shadow: 0 0 18px rgba(239, 68, 68, 0.32), inset 0 0 10px rgba(239, 68, 68, 0.16);
+            filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.45));
+        }
+
+        .group:hover .icon-bounce-hover::after,
+        .icon-bounce-hover:hover::after {
+            animation: iconLightSweep 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Smooth Slide Down Entrance for Staggered Items */
+        @keyframes slideDownBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-22px) scale(0.96);
+            }
+            65% {
+                opacity: 1;
+                transform: translateY(4px) scale(1.01);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .animate-slide-down-1 {
+            animation: slideDownBounce 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+        }
+        .animate-slide-down-2 {
+            animation: slideDownBounce 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+        }
+        .animate-slide-down-3 {
+            animation: slideDownBounce 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+        }
+        .animate-slide-down-4 {
+            animation: slideDownBounce 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+        }
+
+        /* Full-Page Entrance Cascade When Website Opens */
+        @keyframes pageAmbientEnter {
+            0% {
+                opacity: 0;
+                transform: scale(1.04);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pageHeaderEnter {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, -100%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes pageBlockEnter {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 26px, 0) scale(0.985);
+                filter: blur(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        .page-ambient-enter {
+            animation: pageAmbientEnter 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .page-header-enter {
+            animation: pageHeaderEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both;
+        }
+
+        .page-enter-item {
+            opacity: 0;
+            will-change: transform, opacity, filter;
+        }
+
+        .page-enter-item.is-entered {
+            animation: pageBlockEnter 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--enter-delay, 0ms) both;
+        }
+
+        /* Typewriter Caret for Hero Name */
+        @keyframes caretBlink {
+            0%, 49% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .typewriter-caret {
+            display: inline-block;
+            width: 3px;
+            height: 0.85em;
+            margin-left: 6px;
+            vertical-align: -0.06em;
+            border-radius: 9999px;
+            background: linear-gradient(180deg, #ffffff 0%, #60a5fa 100%);
+            box-shadow: 0 0 12px rgba(96, 165, 250, 0.85);
+            animation: caretBlink 0.78s steps(1) infinite;
+        }
+
+        /* Section Pulse Highlight on Smooth Nav Slide */
+        @keyframes sectionFocusPulse {
+            0% {
+                opacity: 0.88;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .section-slide-focus {
+            animation: sectionFocusPulse 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+            60% {
+                transform: translateY(3px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .section-slide-focus {
+            animation: sectionFocusPulse 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Lightbox Open & Bounce Out Animations */
+        #lightboxModal {
+            transition: opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                        backdrop-filter 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        #lightboxPanel {
+            will-change: transform, opacity;
+            transform-origin: center center;
+            transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.52s ease;
+        }
+
+        @keyframes lightboxSlideIn {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 18px, 0) scale(0.985);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+        }
+
+        .lightbox-slide-item {
+            opacity: 0;
+            animation: lightboxSlideIn 0.52s cubic-bezier(0.22, 1, 0.36, 1) var(--slide-delay, 80ms) forwards;
+        }
+
+        @keyframes cardLandingBounce {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(0.945);
+            }
+            65% {
+                transform: scale(1.032);
+            }
+            85% {
+                transform: scale(0.992);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .card-landing-bounce {
+            animation: cardLandingBounce 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Continuous Smooth & Even Running Border Light Beam on Card Hover */
+        @property --border-beam-angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @keyframes borderBeamSpin {
+            0% {
+                --border-beam-angle: 0deg;
+            }
+            100% {
+                --border-beam-angle: 360deg;
+            }
+        }
+
+        .glow-border-card {
+            position: relative;
+        }
+
+        .glow-border-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: conic-gradient(
+                from var(--border-beam-angle),
+                rgba(255, 255, 255, 0.14) 0deg,
+                rgba(252, 165, 165, 0.35) 55deg,
+                rgba(248, 113, 113, 0.72) 115deg,
+                rgba(255, 255, 255, 1) 180deg,
+                rgba(248, 113, 113, 0.72) 245deg,
+                rgba(252, 165, 165, 0.35) 305deg,
+                rgba(255, 255, 255, 0.14) 360deg
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 30;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.45));
+            transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity;
+        }
+
+        .glow-border-card:hover::before {
+            opacity: 1;
+            animation: borderBeamSpin 3.6s linear infinite;
+        }
+
+        /* Glassmorphism Card Glow & Smooth Hover Bounce */
+        @keyframes cardHoverBounce {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            45% {
+                transform: translateY(-10px) scale(1.018);
+            }
+            75% {
+                transform: translateY(-5px) scale(1.008);
+            }
+            100% {
+                transform: translateY(-7px) scale(1.012);
+            }
+        }
+
+        .led-card {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        border-color 0.35s ease,
+                        box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform;
+        }
+        .led-card:hover {
+            animation: cardHoverBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            border-color: rgba(255, 255, 255, 0.55);
+            box-shadow: 0 24px 52px -12px rgba(0, 0, 0, 0.85), 0 0 36px -2px rgba(255, 255, 255, 0.16), 0 0 28px -2px rgba(239, 68, 68, 0.32);
+        }
+
+        /* Continuous Horizontal Carousel with Center Focus Scale */
+        .carousel-viewport {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 2.75rem 0;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+        }
+
+        .carousel-viewport:active {
+            cursor: grabbing;
+        }
+
+        .carousel-track {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .carousel-slide-item {
+            width: 280px;
+            flex-shrink: 0;
+            will-change: transform, opacity;
+            transform-origin: center center;
+            transition: filter 0.35s ease;
+        }
+
+        .carousel-slide-item.is-center-focus .led-card {
+            border-color: rgba(147, 197, 253, 0.55);
+            box-shadow: 0 24px 54px -12px rgba(0, 0, 0, 0.9), 0 0 32px -4px rgba(59, 130, 246, 0.32);
+        }
+
+        @media (min-width: 640px) {
+            .carousel-slide-item {
+                width: 340px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .carousel-slide-item {
+                width: 400px;
+            }
+        }
+
+        .carousel-slide-item .led-card:hover {
+            animation: none;
+        }
+
+        /* Staggered Luminous Section Dividers */
+        @keyframes dividerBeamLTR {
+            0% {
+                transform: translate3d(-100%, 0, 0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(100vw, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes dividerBeamRTL {
+            0% {
+                transform: translate3d(100vw, 0, 0);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(-100%, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        .section-luminous-divider {
+            position: relative;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(30, 64, 175, 0.22) 20%,
+                rgba(59, 130, 246, 0.35) 50%,
+                rgba(30, 64, 175, 0.22) 80%,
+                transparent 100%
+            );
+            overflow: hidden;
+        }
+
+        .section-luminous-divider .divider-beam {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 280px;
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(59, 130, 246, 0.55) 25%,
+                rgba(255, 255, 255, 0.98) 50%,
+                rgba(147, 197, 253, 0.65) 75%,
+                transparent 100%
+            );
+            box-shadow: 0 0 14px rgba(96, 165, 250, 0.85), 0 0 28px rgba(37, 99, 235, 0.55);
+            will-change: transform, opacity;
+        }
+
+        .divider-beam-ltr {
+            animation: dividerBeamLTR 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .divider-beam-rtl {
+            animation: dividerBeamRTL 6.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Vertical & Horizontal Luminous Split Divider Inside Work Experience Cards */
+        @keyframes expVerticalBeamRun {
+            0% {
+                transform: translate3d(0, -100%, 0);
+                opacity: 0;
+            }
+            18% {
+                opacity: 1;
+            }
+            82% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(0, 260%, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes expHorizontalBeamRun {
+            0% {
+                transform: translate3d(-100%, 0, 0);
+                opacity: 0;
+            }
+            18% {
+                opacity: 1;
+            }
+            82% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate3d(320%, 0, 0);
+                opacity: 0;
+            }
+        }
+
+        .exp-split-line-v {
+            position: relative;
+            width: 1px;
+            align-self: stretch;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(59, 130, 246, 0.28) 25%,
+                rgba(96, 165, 250, 0.42) 50%,
+                rgba(59, 130, 246, 0.28) 75%,
+                transparent 100%
+            );
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .exp-split-line-v::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -0.5px;
+            width: 2px;
+            height: 42%;
+            border-radius: 9999px;
+            background: linear-gradient(
+                180deg,
+                transparent 0%,
+                rgba(59, 130, 246, 0.65) 25%,
+                rgba(255, 255, 255, 0.98) 50%,
+                rgba(147, 197, 253, 0.7) 75%,
+                transparent 100%
+            );
+            box-shadow: 0 0 10px rgba(96, 165, 250, 0.9), 0 0 18px rgba(37, 99, 235, 0.6);
+            animation: expVerticalBeamRun 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            will-change: transform, opacity;
+        }
+
+        .exp-split-line-h {
+            position: relative;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(59, 130, 246, 0.3) 25%,
+                rgba(96, 165, 250, 0.42) 50%,
+                rgba(59, 130, 246, 0.3) 75%,
+                transparent 100%
+            );
+            overflow: hidden;
+        }
+
+        .exp-split-line-h::after {
+            content: '';
+            position: absolute;
+            top: -0.5px;
+            left: 0;
+            width: 34%;
+            height: 2px;
+            border-radius: 9999px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(59, 130, 246, 0.65) 25%,
+                rgba(255, 255, 255, 0.98) 50%,
+                rgba(147, 197, 253, 0.7) 75%,
+                transparent 100%
+            );
+            box-shadow: 0 0 10px rgba(96, 165, 250, 0.9);
+            animation: expHorizontalBeamRun 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Editable outline cue */
+        body.edit-mode-active [data-editable="true"] {
+            outline: 1px dashed rgba(161, 161, 170, 0.45);
+            outline-offset: 4px;
+            border-radius: 6px;
+            cursor: text;
+        }
+        body.edit-mode-active [data-editable="true"]:focus {
+            outline: 1px solid #f4f4f5;
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-platinum font-sans antialiased selection:bg-platinum selection:text-obsidian overflow-x-hidden">
+    <!-- Ambient Deep Midnight Dark Blue Tones, Cyntch-Inspired Grid & Subtle Luminous Effects -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden ambient-gradient-bg page-ambient-enter">
+        <video id="bgAmbientVideo" src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-in-slow-motion-21604-large.mp4" autoplay="" loop="" muted="" playsinline="" class="absolute inset-0 w-full h-full object-cover opacity-[0.07] mix-blend-screen transition-opacity duration-700"></video>
+
+        <!-- Cyntch Top Horizon Radial Glow & Architectural Tech Grid -->
+        <div class="absolute inset-0 cyntch-horizon-glow"></div>
+        <div class="absolute inset-0 cyntch-grid-pattern"></div>
+        <div id="cyntchInteractiveGrid" class="absolute inset-0 cyntch-grid-interactive"></div>
+
+        <!-- Interactive Cursor Spotlight Glow (Subtle Deep Sapphire Illumination) -->
+        <div id="cyntchCursorGlow" class="absolute inset-0 transition-opacity duration-500" style="background: radial-gradient(600px circle at 50% 25%, rgba(29, 78, 216, 0.1), transparent 70%);"></div>
+
+        <!-- Concentric Luminous Orbital Rings with Orbiting Nodes -->
+        <div class="absolute top-[16%] left-1/2 w-[780px] h-[780px] rounded-full border border-blue-500/10 cyntch-orbit-ring-1">
+            <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-blue-400/75 shadow-[0_0_10px_rgba(59,130,246,0.75)]"></span>
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 rounded-full bg-blue-500/60 shadow-[0_0_8px_rgba(37,99,235,0.65)]"></span>
+        </div>
+        <div class="absolute top-[16%] left-1/2 w-[1140px] h-[1140px] rounded-full border border-blue-600/[0.07] cyntch-orbit-ring-2">
+            <span class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-sky-400/70 shadow-[0_0_10px_rgba(56,189,248,0.7)]"></span>
+        </div>
+
+        <!-- Traveling Light Beams Along Grid Lines -->
+        <div class="cyntch-beam-h" style="top: 192px; animation-delay: 0s;"></div>
+        <div class="cyntch-beam-h" style="top: 448px; animation-delay: -5.5s;"></div>
+        <div class="cyntch-beam-v" style="left: 256px; animation-delay: -2s;"></div>
+        <div class="cyntch-beam-v" style="left: 768px; animation-delay: -7.5s;"></div>
+        <div class="cyntch-beam-v hidden lg:block" style="left: 1216px; animation-delay: -4s;"></div>
+
+        <!-- Layered Deep Midnight Dark Blue Glowing Orbs -->
+        <div class="absolute top-[-16%] left-[2%] w-[760px] h-[760px] bg-[#040e26]/75 rounded-full blur-[145px] animate-orb-1"></div>
+        <div class="absolute bottom-[-22%] right-[2%] w-[820px] h-[820px] bg-[#061436]/55 rounded-full blur-[155px] animate-orb-2"></div>
+        <div class="absolute top-[30%] left-[48%] -translate-x-1/2 w-[620px] h-[620px] bg-[#05102b]/65 rounded-full blur-[150px] animate-orb-1"></div>
+        <div class="absolute top-[12%] right-[14%] w-[460px] h-[460px] bg-[#081a45]/35 rounded-full blur-[135px] animate-orb-2"></div>
+        <!-- Occasional Deep Sapphire Shimmer Accents -->
+        <div class="absolute top-[22%] left-[24%] w-[520px] h-[520px] bg-[#173a8a]/16 rounded-full blur-[140px] animate-elegant-glow"></div>
+        <div class="absolute bottom-[18%] right-[22%] w-[560px] h-[560px] bg-[#1d4ed8]/14 rounded-full blur-[150px] animate-elegant-glow" style="animation-delay: -5.5s;"></div>
+
+        <!-- Elegant Dark Blue Silk Waves & Geometric Abstracts -->
+        <svg class="absolute inset-0 w-full h-full animate-abstract-float" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+                <linearGradient id="darkBlueWave1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#040d24" stop-opacity="0.72"></stop>
+                    <stop offset="50%" stop-color="#0f2b6b" stop-opacity="0.32"></stop>
+                    <stop offset="100%" stop-color="#010308" stop-opacity="0"></stop>
+                </linearGradient>
+                <linearGradient id="darkBlueWave2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#133480" stop-opacity="0.34"></stop>
+                    <stop offset="55%" stop-color="#05102b" stop-opacity="0.35"></stop>
+                    <stop offset="100%" stop-color="#010205" stop-opacity="0"></stop>
+                </linearGradient>
+                <linearGradient id="darkBlueWave3" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#030a1c" stop-opacity="0.6"></stop>
+                    <stop offset="50%" stop-color="#173d94" stop-opacity="0.22"></stop>
+                    <stop offset="100%" stop-color="#010308" stop-opacity="0"></stop>
+                </linearGradient>
+                <linearGradient id="darkBlueStroke" x1="0%" y1="50%" x2="100%" y2="50%">
+                    <stop offset="0%" stop-color="#173a8a" stop-opacity="0"></stop>
+                    <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.36"></stop>
+                    <stop offset="100%" stop-color="#173a8a" stop-opacity="0"></stop>
+                </linearGradient>
+            </defs>
+            <!-- Flowing Elegant Dark Blue Abstract Shapes -->
+            <path class="animate-silk-wave" d="M-120 180 C 260 40, 560 420, 960 220 C 1220 90, 1400 240, 1580 140 L 1580 -80 L -120 -80 Z" fill="url(#darkBlueWave1)"></path>
+            <path class="animate-silk-wave" style="animation-delay: -4s;" d="M-100 760 C 280 540, 680 860, 1080 620 C 1290 495, 1430 610, 1560 540 L 1560 980 L -100 980 Z" fill="url(#darkBlueWave2)"></path>
+            <path class="animate-silk-wave" style="animation-delay: -8s;" d="M-140 520 C 220 320, 640 620, 1060 360 C 1280 225, 1440 340, 1580 260 L 1580 680 L -140 680 Z" fill="url(#darkBlueWave3)"></path>
+            <!-- Subtle Luminous Sapphire Abstract Rings & Curves -->
+            <ellipse cx="1160" cy="240" rx="340" ry="190" transform="rotate(-18 1160 240)" stroke="url(#darkBlueStroke)" stroke-width="1.4"></ellipse>
+            <ellipse cx="260" cy="640" rx="380" ry="210" transform="rotate(14 260 640)" stroke="url(#darkBlueStroke)" stroke-width="1.4"></ellipse>
+            <path d="M-80 460 Q 420 260, 780 480 T 1540 390" stroke="url(#darkBlueStroke)" stroke-width="1.25" fill="none"></path>
+        </svg>
+
+        <canvas id="bgParticlesCanvas" class="absolute inset-0 w-full h-full opacity-55" width="1868" height="851"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#010206]/65 via-[#010309]/35 to-[#010205]/85"></div>
+    </div>
+
+    <!-- Edit Mode Banner (Visible only when Edit Mode is ON) -->
+    <div id="editBanner" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-2xl bg-graphite/95 backdrop-blur-xl border border-zinc-600/70 shadow-2xl rounded-2xl px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 transition-all duration-300">
+        <div class="flex items-center gap-2.5">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <span class="text-xs sm:text-sm font-medium text-platinum">Edit Mode Active — Click any text to edit directly</span>
+        </div>
+        <div class="flex items-center gap-2 ml-auto">
+            <button onclick="resetPortfolio()" class="px-3 py-1.5 text-xs font-medium text-silver hover:text-white bg-charcoal hover:bg-zinc-800 border border-slateborder rounded-lg transition">
+                Reset Default
+            </button>
+            <button onclick="saveAndExitEditMode()" class="px-4 py-1.5 text-xs font-semibold text-obsidian bg-platinum hover:bg-white rounded-lg shadow transition flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5"><path d="M20 6 9 17l-5-5"></path></svg>
+                Save &amp; Done
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-obsidian/90 backdrop-blur-xl border-b border-slateborder/70 page-header-enter">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 h-16 sm:h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#about" class="nav-smooth-link flex items-center gap-2 group min-w-0">
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-zinc-200 to-zinc-600 p-[1px] icon-bounce-hover shrink-0">
+                    <div class="w-full h-full bg-obsidian rounded-[7px] flex items-center justify-center group-hover:bg-charcoal transition">
+                        <span class="font-mono text-[10px] sm:text-xs font-bold tracking-tighter text-platinum">LCH</span>
+                    </div>
+                </div>
+                <span id="navBrandName" class="font-semibold tracking-wider text-xs sm:text-base uppercase text-platinum truncate">LE CONG HOANG</span>
+            </a>
+
+            <!-- Smooth Anchor Links (Desktop) -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-silver">
+                <a href="#about" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">About</a>
+                <a href="#experience" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Experience</a>
+                <a href="#visual-led" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Visual Led</a>
+                <a href="#motion-graphics" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Motion Graphics</a>
+                <a href="#three-d-cgi" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">3D Model / CGI</a>
+                <a href="#contact" class="nav-smooth-link hover:text-platinum transition-all duration-300 hover:-translate-y-0.5 py-1">Contact</a>
+            </nav>
+
+            <!-- Action Controls (Edit Trigger) -->
+            <div class="flex items-center gap-2">
+                <button id="toggleEditBtn" onclick="toggleEditMode()" class="group px-3.5 py-2 rounded-xl text-xs font-medium border border-slateborder bg-charcoal/90 hover:bg-graphite text-platinum transition-all flex items-center gap-1.5 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-3" aria-hidden="true" class="lucide lucide-edit-3 w-3.5 h-3.5 text-silver icon-bounce-hover"><path d="M13 21h8"></path><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+                    <span id="toggleEditText">Edit</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24 sm:pt-36 pb-20 sm:pb-24 w-full overflow-x-hidden">
+
+        <!-- HERO / ABOUT SECTION -->
+        <section id="about" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-32 scroll-mt-24 sm:scroll-mt-28">
+            <div class="reveal active">
+                <!-- Centered Hero Banner: Large Scaled Name & Role -->
+                <div class="text-center max-w-5xl mx-auto pt-2 sm:pt-8 pb-10 sm:pb-20 flex flex-col items-center">
+                    <!-- Status Badge -->
+                    <div class="animate-slide-down-1 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-charcoal/90 border border-slateborder text-[11px] sm:text-xs font-mono text-silver mb-5 sm:mb-8 shadow-lg text-center max-w-[92vw]">
+                        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse shadow-[0_0_8px_rgba(96,165,250,0.9)] shrink-0"></span>
+                        <span class="truncate">STAGE VISUALS • 3D MAPPING • CONCERT LED</span>
+                    </div>
+
+                    <!-- Main Name & Role (Centered & Scaled Up) -->
+                    <h1 id="profileName" data-editable="true" data-field="name" class="animate-slide-down-2 text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.12] py-1 mb-3 sm:mb-4 bg-gradient-to-b from-white via-zinc-100 to-zinc-500 bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(37,99,235,0.22)] min-h-[1.2em] px-2">
+                        LE CONG HOANG
+                    </h1>
+                    <p id="profileRole" data-editable="true" data-field="role" class="animate-slide-down-2 text-sm sm:text-xl lg:text-2xl font-medium tracking-wide text-silver mb-6 sm:mb-10 px-2">
+                        Visual Artist / Motion Graphics / Video Editor
+                    </p>
+
+                    <!-- Centered Action Buttons -->
+                    <div class="animate-slide-down-4 flex flex-wrap items-center justify-center gap-3">
+                        <a href="#visual-led" class="glow-border-card nav-smooth-link group px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs sm:text-sm font-semibold transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 shadow-lg">
+                            <span>Explore Showreel</span>
+                            <i data-lucide="arrow-down-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5"></i>
+                        </a>
+                        <a href="#contact" class="glow-border-card nav-smooth-link px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-charcoal/85 backdrop-blur-md hover:bg-graphite border border-slateborder text-platinum text-xs sm:text-sm font-medium transition-all duration-300 hover:-translate-y-1">
+                            Get in Touch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lower Split Row: "Introduce" on Left & 4 Personal Spec Cards on Right -->
+                <div class="pt-8 sm:pt-12 border-t border-slateborder/60 grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-10 items-center">
+                    <!-- Left Column: Introduce Heading & Personal Bio -->
+                    <div class="xl:col-span-7 page-enter-item" style="--enter-delay: 260ms;">
+                        <div class="mb-3 sm:mb-4">
+                            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">PROFILE OVERVIEW</span>
+                            <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-platinum">Introduce</h2>
+                        </div>
+                        <p id="profileBio" data-editable="true" data-field="bio" class="text-xs sm:text-base text-zinc-400 leading-relaxed max-w-4xl">
+                            I am a visual creator specializing in 3D Modeling, Visual Art, and Motion Graphics. Driven by a deep passion for visual arts and dynamic movement, I constantly explore innovative ways to bring concepts to life by combining 3D environments, lighting, textures, color theory, and animation. My creative direction focuses on crafting aesthetically refined, imaginative, and visually immersive works—with particular enthusiasm for Stage Visual LED, Live Performances, 3D Animation, and Motion Design.
+                        </p>
+                    </div>
+
+                    <!-- Right Column: 4 Personal Spec Cards -->
+                    <div class="xl:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 320ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="calendar" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Birth Year</span>
+                                <span id="profileYear" data-editable="true" data-field="birthYear" class="text-xs sm:text-base font-semibold text-platinum">1999</span>
+                            </div>
+                        </div>
+
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 380ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="map-pin" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Location</span>
+                                <span id="profileCity" data-editable="true" data-field="city" class="text-xs sm:text-base font-semibold text-platinum">Hanoi, Vietnam</span>
+                            </div>
+                        </div>
+
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 440ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="layers" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Showreel Works</span>
+                                <span id="projectCountBadge" class="text-xs sm:text-base font-semibold text-platinum">12 Projects</span>
+                            </div>
+                        </div>
+
+                        <div class="page-enter-item glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center gap-3.5 transition-all duration-300 hover:-translate-y-1" style="--enter-delay: 500ms;">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-graphite flex items-center justify-center border border-slateborder shrink-0 icon-bounce-hover">
+                                <i data-lucide="cpu" class="w-4 h-4 sm:w-5 sm:h-5 text-platinum"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-zinc-500">Core Focus</span>
+                                <span class="text-xs sm:text-base font-semibold text-platinum">Visual Led, Motion Graphics, 3D</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Software & Creative Tools Bar inside Section 01 -->
+                <div class="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-slateborder/60 page-enter-item" style="--enter-delay: 540ms;">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 sm:mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500">SOFTWARE &amp; CREATIVE TOOLKIT</span>
+                        </div>
+                        <span class="hidden sm:block text-[11px] font-mono text-zinc-500">MOTION GRAPHICS • VIDEO EDITING • 3D &amp; TEXTURING</span>
+                    </div>
+
+                    <div id="toolsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                        <!-- Adobe After Effects -->
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00005B] border border-[#9999FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(153,153,255,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#9999FF]">Ae</span>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-semibold text-platinum truncate">After Effects</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">Motion &amp; VFX</span>
+                            </div>
+                        </div>
+
+                        <!-- Adobe Premiere Pro -->
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00005B] border border-[#9999FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(153,153,255,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#9999FF]">Pr</span>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-semibold text-platinum truncate">Premiere Pro</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">Video Editing</span>
+                            </div>
+                        </div>
+
+                        <!-- Adobe Photoshop -->
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#001E36] border border-[#31A8FF]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(49,168,255,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#31A8FF]">Ps</span>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-semibold text-platinum truncate">Photoshop</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">Visual Design</span>
+                            </div>
+                        </div>
+
+                        <!-- Adobe Illustrator -->
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#330000] border border-[#FF9A00]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(255,154,0,0.22)] icon-bounce-hover">
+                                <span class="font-sans text-sm sm:text-[15px] font-extrabold tracking-tight text-[#FF9A00]">Ai</span>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-semibold text-platinum truncate">Illustrator</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">Vector Design</span>
+                            </div>
+                        </div>
+
+                        <!-- Blender -->
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#1a120b] border border-[#EA7600]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(234,118,0,0.22)] icon-bounce-hover">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12.5 5.5L16.5 8.5M12.5 5.5L8.2 8.8M16.5 8.5H7.2M16.5 8.5C18.8 9.6 20.3 11.9 20.3 14.5C20.3 18.1 17.3 21 13.7 21C10.1 21 7.2 18.1 7.2 14.5C7.2 13.3 7.5 12.2 8.1 11.2L4.2 14.2" stroke="#EA7600" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="13.7" cy="14.5" r="3.4" stroke="#EA7600" stroke-width="2"/>
+                                    <circle cx="13.7" cy="14.5" r="1.5" fill="#265787"/>
+                                </svg>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-semibold text-platinum truncate">Blender</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">3D &amp; Animation</span>
+                            </div>
+                        </div>
+
+                        <!-- Quixel Mixer -->
+                        <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl px-3.5 py-3 flex items-center gap-2.5 transition-all duration-300 hover:-translate-y-1">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#071921] border border-[#00A8E8]/60 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(0,168,232,0.22)] icon-bounce-hover">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <polygon points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5" stroke="#00A8E8" stroke-width="1.9" stroke-linejoin="round"/>
+                                    <path d="M8.5 15V9.5L12 13L15.5 9.5V15" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-semibold text-platinum truncate">Quixel Mixer</span>
+                                <span class="block text-[10px] font-mono text-zinc-500 truncate">PBR Texturing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience Timeline inside Section 01 -->
+                <div id="experience" class="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-slateborder/60 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 640ms;">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+                        <div>
+                            <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">CAREER TIMELINE</span>
+                            <h3 class="text-xl sm:text-3xl font-bold tracking-tight text-platinum">Work Experience</h3>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
+                                VISUAL STAGE • MOTION DESIGN • 3D CGI
+                            </span>
+
+                            <button id="addExperienceBtn" onclick="openExperienceModal()" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                                Add Experience
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="experienceList" class="space-y-3.5"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staggered Divider 01 -> 02 -->
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
+            <div class="section-luminous-divider">
+                <span class="divider-beam divider-beam-ltr" style="animation-delay: 0s;"></span>
+            </div>
+        </div>
+
+        <!-- SECTION 02: VISUAL LED SHOWREEL (CAROUSEL) -->
+        <section id="visual-led" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 720ms;">
+            <div class="reveal active">
+                <!-- Section Header & Filter Tabs -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-5 sm:mb-6">
+                    <div>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1 sm:mb-2">02 / PORTFOLIO SHOWREEL</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-platinum">Visual Led</h2>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <!-- Filter Buttons -->
+                        <div class="inline-flex p-1 rounded-xl bg-charcoal border border-slateborder">
+                            <button onclick="filterProjects('all')" data-filter="all" class="filter-btn active px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium transition-all bg-graphite text-platinum shadow">
+                                All
+                            </button>
+                            <button onclick="filterProjects('video')" data-filter="video" class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium hover:text-platinum transition-all text-silver">
+                                Video
+                            </button>
+                            <button onclick="filterProjects('image')" data-filter="image" class="filter-btn px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium hover:text-platinum transition-all text-silver">
+                                Stills
+                            </button>
+                        </div>
+
+                        <!-- Add New Visual LED Project Button (Visible in Edit Mode) -->
+                        <button id="addProjectBtn" onclick="openProjectModal(null, 'led')" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            Add
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Visual LED Projects Carousel -->
+                <div id="projectsCarouselViewport" class="carousel-viewport">
+                    <div id="projectsGrid" class="carousel-track"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staggered Divider 02 -> 03 -->
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
+            <div class="section-luminous-divider">
+                <span class="divider-beam divider-beam-rtl" style="animation-delay: -1.6s;"></span>
+            </div>
+        </div>
+
+        <!-- SECTION 03: MOTION GRAPHICS SHOWREEL (CAROUSEL) -->
+        <section id="motion-graphics" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 800ms;">
+            <div class="reveal active">
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-5 sm:mb-6">
+                    <div>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1 sm:mb-2">03 / MOTION SHOWREEL</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-platinum">Motion Graphics</h2>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <span class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
+                            2D / 3D MOTION • BRAND IDENT
+                        </span>
+
+                        <!-- Add New Motion Graphics Video Button (Visible in Edit Mode) -->
+                        <button id="addMotionBtn" onclick="openProjectModal(null, 'motion')" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            Add
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Motion Graphics Videos Carousel -->
+                <div id="motionCarouselViewport" class="carousel-viewport">
+                    <div id="motionGrid" class="carousel-track"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staggered Divider 03 -> 04 -->
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
+            <div class="section-luminous-divider">
+                <span class="divider-beam divider-beam-ltr" style="animation-delay: -3.2s;"></span>
+            </div>
+        </div>
+
+        <!-- SECTION 04: 3D MODEL / CGI SHOWREEL (CAROUSEL) -->
+        <section id="three-d-cgi" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 880ms;">
+            <div class="reveal active">
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-5 sm:mb-6">
+                    <div>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1 sm:mb-2">04 / 3D &amp; CGI SHOWREEL</span>
+                        <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-platinum">3D Model / CGI</h2>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <span class="hidden sm:inline-flex px-3.5 py-2 rounded-xl bg-charcoal border border-slateborder text-xs font-mono text-silver">
+                            HARD-SURFACE • PRODUCT CGI
+                        </span>
+
+                        <!-- Add New 3D / CGI Project Button (Visible in Edit Mode) -->
+                        <button id="addThreeDBtn" onclick="openProjectModal(null, 'threeD')" class="hidden px-3.5 py-2 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                            Add
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3D Model / CGI Carousel -->
+                <div id="threeDCarouselViewport" class="carousel-viewport">
+                    <div id="threeDGrid" class="carousel-track"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staggered Divider 04 -> 05 -->
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 mb-16 sm:mb-28" aria-hidden="true">
+            <div class="section-luminous-divider">
+                <span class="divider-beam divider-beam-rtl" style="animation-delay: -4.8s;"></span>
+            </div>
+        </div>
+
+        <!-- SECTION 05: CONTACT & SOCIAL MEDIA SECTION -->
+        <section id="contact" class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 scroll-mt-24 sm:scroll-mt-28 page-enter-item" style="--enter-delay: 960ms;">
+            <div class="reveal bg-gradient-to-b from-charcoal to-obsidian border border-slateborder rounded-3xl p-5 sm:p-10 lg:p-12 relative overflow-hidden active">
+                <!-- Decorative Subtle Corner Light -->
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-zinc-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Header Row -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 pb-5 sm:pb-6 mb-6 sm:mb-8 border-b border-slateborder/70 relative z-10">
+                    <div>
+                        <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-zinc-500 block mb-1">05 / CONNECT &amp; COLLABORATE</span>
+                        <h2 class="text-xl sm:text-3xl font-bold tracking-tight text-platinum">Get in Touch</h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-zinc-400 max-w-xl leading-relaxed">
+                        Available for freelance and full-time collaborations in Stage Visual LED, Motion Graphics, and 3D Modeling / CGI.
+                    </p>
+                </div>
+
+                <!-- Full-Width 4-Column Contact & Social Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 relative z-10">
+                    <!-- Gmail Card -->
+                    <div class="glow-border-card group bg-obsidian/90 border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 hover:border-zinc-600 transition-all duration-300 hover:-translate-y-0.5">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-graphite border border-slateborder flex items-center justify-center text-platinum shrink-0 icon-bounce-hover">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" aria-hidden="true" class="lucide lucide-mail w-4 h-4"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-[10px] font-mono uppercase tracking-wider text-zinc-500">Email</span>
+                                <a id="contactEmailLink" href="mailto:conghoang26299@gmail.com" class="block truncate text-xs sm:text-sm font-medium text-platinum hover:underline" target="_blank" rel="noopener noreferrer">
+                                    <span id="contactEmail" data-editable="true" data-field="email">conghoang26299@gmail.com</span>
+                                </a>
+                            </div>
+                        </div>
+                        <button onclick="copyContact('email')" title="Copy Email" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white border border-slateborder transition shrink-0 icon-bounce-hover">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-3.5 h-3.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+                        </button>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="glow-border-card group bg-obsidian/90 border border-slateborder rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 hover:border-zinc-600 transition-all duration-300 hover:-translate-y-0.5">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-graphite border border-slateborder flex items-center justify-center text-platinum shrink-0 icon-bounce-hover">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+                            </div>
+                            <div class="min-w-0">
+                                <span class="block text-[10px] font-mono uppercase tracking-wider text-zinc-500">Phone / Zalo</span>
+                                <a id="contactPhoneLink" href="tel:0989319090" class="block truncate text-xs sm:text-sm font-medium text-platinum hover:underline" target="_blank" rel="noopener noreferrer">
+                                    <span id="contactPhone" data-editable="true" data-field="phone">0989319090</span>
+                                </a>
+                            </div>
+                        </div>
+                        <button onclick="copyContact('phone')" title="Copy Phone Number" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white border border-slateborder transition shrink-0 icon-bounce-hover">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-3.5 h-3.5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+                        </button>
+                    </div>
+
+                    <!-- Facebook -->
+                    <a id="socialFacebookLink" href="https://www.facebook.com/hoangcong.le.99/" target="_blank" rel="noopener noreferrer" class="glow-border-card group flex items-center justify-between px-3.5 sm:px-4 py-3.5 sm:py-4 rounded-2xl bg-graphite/80 hover:bg-zinc-800 border border-slateborder hover:border-zinc-500 transition-all duration-300 hover:-translate-y-0.5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-obsidian border border-slateborder flex items-center justify-center shrink-0 icon-bounce-hover">
+                                <svg class="w-4 h-4 text-silver group-hover:text-white transition-colors fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] font-mono uppercase tracking-wider text-zinc-500">Social</span>
+                                <span class="text-xs sm:text-sm font-medium text-platinum">Facebook</span>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4 text-zinc-500 group-hover:text-platinum transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a id="socialLinkedinLink" href="https://www.linkedin.com/in/hoang262" target="_blank" rel="noopener noreferrer" class="glow-border-card group flex items-center justify-between px-3.5 sm:px-4 py-3.5 sm:py-4 rounded-2xl bg-graphite/80 hover:bg-zinc-800 border border-slateborder hover:border-zinc-500 transition-all duration-300 hover:-translate-y-0.5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-obsidian border border-slateborder flex items-center justify-center shrink-0 icon-bounce-hover">
+                                <svg class="w-4 h-4 text-silver group-hover:text-white transition-colors fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] font-mono uppercase tracking-wider text-zinc-500">Network</span>
+                                <span class="text-xs sm:text-sm font-medium text-platinum">LinkedIn</span>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right" aria-hidden="true" class="lucide lucide-arrow-up-right w-4 h-4 text-zinc-500 group-hover:text-platinum transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Editable Social & Background Video URLs Inputs (Shown only in Edit Mode) -->
+                <div id="socialEditBox" class="hidden mt-6 pt-6 border-t border-slateborder/70 grid grid-cols-1 md:grid-cols-3 gap-3 relative z-10">
+                    <div>
+                        <label class="block text-[11px] font-mono text-silver mb-1">Facebook Profile URL</label>
+                        <input id="inputFacebookUrl" type="url" oninput="updateSocialUrl('facebook', this.value)" placeholder="https://facebook.com/username" class="w-full px-3 py-2 text-xs bg-obsidian border border-zinc-600 rounded-lg text-platinum focus:outline-none focus:border-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-mono text-silver mb-1">LinkedIn Profile URL</label>
+                        <input id="inputLinkedinUrl" type="url" oninput="updateSocialUrl('linkedin', this.value)" placeholder="https://linkedin.com/in/username" class="w-full px-3 py-2 text-xs bg-obsidian border border-zinc-600 rounded-lg text-platinum focus:outline-none focus:border-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-mono text-silver mb-1">Ambient Background Video URL</label>
+                        <input id="inputBgVideoUrl" type="url" oninput="updateBgVideoUrl(this.value)" placeholder="https://..." class="w-full px-3 py-2 text-xs bg-obsidian border border-zinc-600 rounded-lg text-platinum focus:outline-none focus:border-white">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-slateborder/70 bg-obsidian/90 backdrop-blur-md">
+        <div class="w-full px-4 sm:px-10 lg:px-14 xl:px-20 py-6 sm:py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 text-center sm:text-left">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <span class="font-mono text-platinum font-semibold" id="footerName">LE CONG HOANG</span>
+                <span>•</span>
+                <span>Visual LED &amp; 3D Motion Showreel</span>
+            </div>
+            <p class="font-mono">© <span id="footerYear">2026</span> All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX & ALBUM VIEWER MODAL -->
+    <div id="lightboxModal" onclick="if(event.target===this) closeLightbox()" class="hidden opacity-0 transition-opacity duration-300 fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+        <div id="lightboxPanel" class="w-full max-w-5xl bg-charcoal border border-slateborder rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <!-- Top Bar -->
+            <div class="px-6 py-4 bg-obsidian/90 border-b border-slateborder flex items-center justify-between gap-4 shrink-0">
+                <div class="flex items-center gap-3 min-w-0">
+                    <span id="lightboxBadge" class="px-2.5 py-1 rounded-lg bg-graphite border border-slateborder text-[11px] font-mono uppercase text-platinum shrink-0">ALBUM</span>
+                    <h3 id="lightboxTitle" class="text-sm sm:text-base font-semibold text-platinum truncate">Project Preview</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- Add Image/Video directly to current Album button (visible in Edit Mode) -->
+                    <button id="lightboxAddMediaBtn" onclick="openAddMediaToCurrentAlbum()" class="hidden px-3 py-1.5 rounded-xl bg-platinum text-obsidian hover:bg-white text-xs font-semibold transition items-center gap-1.5 shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-3.5 h-3.5"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                        <span>Add Media</span>
+                    </button>
+                    <button onclick="closeLightbox()" title="Close" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white transition shrink-0">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Vertical Media Stream -->
+            <div id="lightboxMediaContainer" class="bg-black overflow-y-auto flex-1"></div>
+
+            <!-- Description Footer -->
+            <div class="px-6 py-4 bg-charcoal border-t border-slateborder shrink-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <p id="lightboxDesc" class="text-sm text-silver leading-relaxed"></p>
+                <span id="lightboxSlideCounter" class="text-xs font-mono text-zinc-500 shrink-0"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK ADD MEDIA TO LIGHTBOX ALBUM MODAL -->
+    <div id="quickAddMediaModal" class="hidden fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-charcoal border border-slateborder rounded-3xl p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-bold text-platinum">Add Google Drive Media to Album</h3>
+                <button onclick="closeQuickAddMediaModal()" class="p-1.5 rounded-xl bg-graphite text-silver hover:text-white transition">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <form id="quickAddMediaForm" onsubmit="handleQuickAddMediaSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1">Google Drive Folder Link or Multiple File Links</label>
+                    <textarea id="quickDriveLinksInput" rows="4" placeholder="Paste Google Drive folder link (drive.google.com/drive/folders/...) or multiple Google Drive file links (one per line)..." class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-slateborder text-xs text-platinum focus:outline-none focus:border-platinum"></textarea>
+                    <p class="text-[10px] text-zinc-500 mt-1">Automatically detects JPG/PNG images and MP4/MOV videos from Google Drive links and separates them in the album.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1">Caption / Label (Optional)</label>
+                    <input id="quickMediaCaption" type="text" placeholder="e.g. Stage Render Angle B" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-slateborder text-xs text-platinum focus:outline-none">
+                </div>
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeQuickAddMediaModal()" class="px-4 py-2 rounded-xl bg-graphite text-xs text-silver hover:text-white transition">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-platinum text-obsidian text-xs font-semibold hover:bg-white transition">Fetch &amp; Add to Album</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT PROJECT MODAL -->
+    <div id="projectFormModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="w-full max-w-lg bg-charcoal border border-slateborder rounded-3xl p-6 sm:p-8 shadow-2xl my-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 id="projectModalHeading" class="text-xl font-bold text-platinum">Add Showreel Project</h3>
+                <button onclick="closeProjectModal()" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-4 h-4"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+
+            <form id="projectForm" onsubmit="handleProjectSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editProjectId">
+                <input type="hidden" id="editProjectSection" value="led">
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Project / Album Title *</label>
+                    <input id="projTitle" type="text" required="" placeholder="e.g. Neon Cyber Concert Stage 2026" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
+                </div>
+
+                <div id="projTypeWrapper">
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Cover Thumbnail Format *</label>
+                    <select id="projType" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
+                        <option value="image">Cover Image (JPG / PNG from Google Drive)</option>
+                        <option value="video">Cover Video (MP4 / MOV from Google Drive)</option>
+                    </select>
+                </div>
+
+                <div id="motionMetaWrapper" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-silver mb-1.5">Category / Client</label>
+                        <input id="projCategory" type="text" placeholder="e.g. 3D Product / TVC" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-silver mb-1.5">Resolution / Aspect Ratio</label>
+                        <input id="projSpecs" type="text" placeholder="e.g. 4K 60FPS • 16:9" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Album Cover Thumbnail (Google Drive Link) *</label>
+                    <input id="projUrl" type="url" required placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-xs text-platinum focus:outline-none focus:border-platinum">
+                    <p class="text-[10px] text-zinc-500 mt-1">Separate Google Drive link for the album cover thumbnail (JPG/PNG or MP4/MOV).</p>
+                </div>
+
+                <!-- Album Items Manager (Google Drive Folder or File Links) -->
+                <div id="albumItemsWrapper" class="pt-2 border-t border-slateborder/80 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-mono uppercase text-platinum">Album Media (Google Drive Folder / Links)</label>
+                        <span id="albumItemCountLabel" class="text-[11px] font-mono text-zinc-400">0 items</span>
+                    </div>
+
+                    <div id="albumItemsEditorList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
+
+                    <div class="p-3 rounded-2xl bg-obsidian/90 border border-slateborder space-y-2.5">
+                        <div>
+                            <label class="block text-[11px] font-mono text-silver mb-1">Google Drive Folder Link or Multiple File Links</label>
+                            <textarea id="driveAlbumSourceLinks" rows="3" placeholder="Paste Google Drive Folder URL (https://drive.google.com/drive/folders/...) or multiple Google Drive file links (one per line)..." class="w-full px-3 py-2 rounded-xl bg-charcoal border border-slateborder text-xs text-platinum focus:outline-none focus:border-platinum"></textarea>
+                        </div>
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[10px] text-zinc-500">Auto-sorts JPG/PNG photos &amp; MP4/MOV videos</span>
+                            <button type="button" id="btnParseDriveLinks" onclick="importGoogleDriveLinksToDraft()" class="px-3.5 py-2 rounded-xl bg-platinum hover:bg-white text-obsidian text-xs font-semibold shrink-0 transition">
+                                + Load From Google Drive
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Short Description / Technical Specs</label>
+                    <textarea id="projDesc" rows="3" placeholder="e.g. 3D motion design &amp; compositing created with Cinema 4D, Octane &amp; After Effects." class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeProjectModal()" class="px-4 py-2.5 rounded-xl bg-graphite hover:bg-zinc-700 text-xs sm:text-sm font-medium text-silver transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-platinum hover:bg-white text-obsidian text-xs sm:text-sm font-semibold transition">
+                        Save Project
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT EXPERIENCE MODAL -->
+    <div id="experienceFormModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="w-full max-w-lg bg-charcoal border border-slateborder rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <h3 id="experienceModalHeading" class="text-xl font-bold text-platinum">Add Work Experience</h3>
+                <button onclick="closeExperienceModal()" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-silver hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-4 h-4"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+                </button>
+            </div>
+
+            <form id="experienceForm" onsubmit="handleExperienceSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editExperienceId" value="">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-silver mb-1.5">Start Date (Month / Year) *</label>
+                        <input id="expStartDate" type="month" required="" onchange="updateDurationPreview()" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum [color-scheme:dark]">
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1.5">
+                            <label class="block text-xs font-mono uppercase text-silver">End Date</label>
+                            <label class="inline-flex items-center gap-1.5 text-[11px] font-mono text-platinum cursor-pointer">
+                                <input id="expIsCurrent" type="checkbox" onchange="toggleCurrentExperience()" class="rounded border-slateborder bg-obsidian accent-platinum">
+                                <span>Present</span>
+                            </label>
+                        </div>
+                        <input id="expEndDate" type="month" onchange="updateDurationPreview()" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum [color-scheme:dark]">
+                    </div>
+                </div>
+
+                <div class="px-3.5 py-2 rounded-xl bg-obsidian/80 border border-slateborder/80 flex items-center justify-between text-xs font-mono">
+                    <span class="text-zinc-500">CALCULATED DURATION:</span>
+                    <span id="expDurationPreview" class="text-platinum font-semibold">—</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Workplace (Company / Studio / Agency) *</label>
+                    <input id="expCompany" type="text" required="" placeholder="e.g. Aura Stage &amp; Visual Studio" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Position / Role *</label>
+                    <input id="expRole" type="text" required="" placeholder="e.g. Lead Visual LED &amp; 3D Motion Artist" class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-silver mb-1.5">Role Overview &amp; Responsibilities *</label>
+                    <textarea id="expDesc" rows="3" required="" placeholder="Describe key responsibilities, notable projects, and tools used..." class="w-full px-4 py-2.5 rounded-xl bg-obsidian border border-slateborder text-sm text-platinum focus:outline-none focus:border-platinum"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-3">
+                    <button type="button" onclick="closeExperienceModal()" class="px-4 py-2.5 rounded-xl bg-graphite hover:bg-zinc-700 text-xs sm:text-sm font-medium text-silver transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-platinum hover:bg-white text-obsidian text-xs sm:text-sm font-semibold transition">
+                        Save Experience
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed top-24 right-5 z-50 transition-transform duration-300 bg-graphite border border-zinc-600 text-platinum px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm font-medium translate-x-[150%]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-4 h-4 text-emerald-400 shrink-0"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
+        <span id="toastMessage">Direct edit mode enabled</span>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. DEFAULT PORTFOLIO DATA & STATE
+        // ==========================================
+        const STORAGE_KEY = 'lch_visual_portfolio_v1';
+
+        const DEFAULT_DATA = {
+            profile: {
+                name: 'LE CONG HOANG',
+                role: 'Visual Artist / Motion Graphics / Video Editor',
+                bio: 'I am a visual creator specializing in 3D Modeling, Visual Art, and Motion Graphics. Driven by a deep passion for visual arts and dynamic movement, I constantly explore innovative ways to bring concepts to life by combining 3D environments, lighting, textures, color theory, and animation. My creative direction focuses on crafting aesthetically refined, imaginative, and visually immersive works—with particular enthusiasm for Stage Visual LED, Live Performances, 3D Animation, and Motion Design.',
+                birthYear: '1999',
+                city: 'Hanoi, Vietnam',
+                email: 'conghoang26299@gmail.com',
+                phone: '0989319090',
+                facebook: 'https://www.facebook.com/hoangcong.le.99/',
+                linkedin: 'https://www.linkedin.com/in/hoang262',
+                bgVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-in-slow-motion-21604-large.mp4'
+            },
+            experiences: [
+                {
+                    id: 'exp-1',
+                    startDate: '2024-01',
+                    endDate: '',
+                    isCurrent: true,
+                    company: 'AURA STAGE & VISUAL PRODUCTION',
+                    role: 'Lead Visual LED & 3D Motion Artist',
+                    desc: '• Lead visual direction and multi-screen LED stage design for large-scale music concerts and festivals\n• Direct and animate 3D CGI loops, real-time visuals, and synchronized show packages for flagship brand events.'
+                },
+                {
+                    id: 'exp-2',
+                    startDate: '2022-03',
+                    endDate: '2023-12',
+                    isCurrent: false,
+                    company: 'LUMINA CREATIVE STUDIO',
+                    role: '3D Generalist & Motion Designer',
+                    desc: '• Produced 3D product commercials, broadcast title sequences, and dynamic motion graphics using Blender, After Effects, and Quixel Mixer\n• Collaborated with creative directors on lighting, texturing, and compositing workflows.'
+                },
+                {
+                    id: 'exp-3',
+                    startDate: '2020-08',
+                    endDate: '2022-02',
+                    isCurrent: false,
+                    company: 'KINETIC MEDIA AGENCY',
+                    role: 'Motion Graphics & Video Editor',
+                    desc: '• Edited promotional videos, event recaps, and social visual campaigns with high-impact typography and VFX transitions\n• Built modular motion templates for multi-platform digital campaigns.'
+                }
+            ],
+            projects: {
+                led: [
+                    {
+                        id: 'led-1',
+                        title: 'CYBER SYMPHONY — MAIN STAGE LED',
+                        type: 'video',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-network-lines-27667-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+                        desc: '32:9 ultra-wide panoramic LED stage visuals engineered at 60FPS for live electronic concert.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-network-lines-27667-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80', caption: 'Main Stage Intro Sequence — 32:9 LED' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1400&q=80', caption: 'Live Concert Lighting & Stage Synchronization' }
+                        ]
+                    },
+                    {
+                        id: 'led-2',
+                        title: 'NEON PULSE — ARENA TOUR 2025',
+                        type: 'video',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-futuristic-devices-99786-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Audio-reactive wireframe structures and kinetic strobe visuals synchronized via SMPTE timecode.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-futuristic-devices-99786-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80', caption: 'Drop Visual Loop — Arena Center Screen' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1400&q=80', caption: 'Stage Rehearsal & SMPTE Setup' }
+                        ]
+                    },
+                    {
+                        id: 'led-3',
+                        title: 'OBSIDIAN MONOLITH — STAGE MAPPING',
+                        type: 'image',
+                        url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80',
+                        fallbackImg: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80',
+                        desc: 'Architectural 3D projection mapping and depth-illusion visuals for festival mainstage.',
+                        items: [
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80', caption: 'Stage Perspective Concept Render' },
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80', caption: 'Mapping Surface Calibration Test' }
+                        ]
+                    },
+                    {
+                        id: 'led-4',
+                        title: 'ASTRAL HORIZON — LIVE PERFORMANCE',
+                        type: 'video',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Atmospheric cosmic particle nebula and volumetric light beams for headline ballad performance.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=80', caption: 'Cosmic Backdrop Loop' }
+                        ]
+                    }
+                ],
+                motion: [
+                    {
+                        id: 'mot-1',
+                        title: 'KINETIC TYPE — FESTIVAL OPENER',
+                        type: 'video',
+                        category: 'Title Sequence',
+                        specs: '4K 60FPS • 16:9',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-futuristic-tunnel-of-blue-lights-34469-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'High-energy kinetic typography and chromatic aberration transitions built in After Effects.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-futuristic-tunnel-of-blue-lights-34469-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?auto=format&fit=crop&w=1200&q=80', caption: 'Full Opener Animation Sequence' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=80', caption: 'Typography Storyboard & Grid Layout' }
+                        ]
+                    },
+                    {
+                        id: 'mot-2',
+                        title: 'CHROMATIC PULSE — BRAND IDENT',
+                        type: 'video',
+                        category: 'Brand Identity',
+                        specs: '4K 60FPS • 16:9',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-liquid-metal-waves-31622-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Liquid metallic shaders and sleek logo reveal for digital entertainment network.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-liquid-metal-waves-31622-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=1200&q=80', caption: 'Logo Reveal Ident' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80', caption: 'Shader Development & Reflection Study' }
+                        ]
+                    },
+                    {
+                        id: 'mot-3',
+                        title: 'HYPERGRID — BROADCAST PACKAGE',
+                        type: 'video',
+                        category: 'Broadcast GFX',
+                        specs: '4K 60FPS • 16:9',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-blue-and-purple-abstract-waves-41615-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Complete lower-thirds, transition stingers, and HUD motion toolkit for live esports broadcast.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-blue-and-purple-abstract-waves-41615-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=1200&q=80', caption: 'Broadcast Transition Stinger' }
+                        ]
+                    },
+                    {
+                        id: 'mot-4',
+                        title: 'SONIC WAVE — MUSIC VISUALIZER',
+                        type: 'video',
+                        category: 'Audio Reactive',
+                        specs: '4K 60FPS • 16:9',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-glowing-particles-floating-in-the-dark-34592-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Frequency-driven particle displacement and glow compositing in After Effects.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-glowing-particles-floating-in-the-dark-34592-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=1200&q=80', caption: 'Audio Reactive Loop' }
+                        ]
+                    }
+                ],
+                threeD: [
+                    {
+                        id: '3d-1',
+                        title: 'CYBERNETIC CORE — HARD SURFACE',
+                        type: 'video',
+                        category: '3D Animation',
+                        specs: 'Blender Cycles • 4K',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-3d-animation-of-a-futuristic-sphere-34594-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Procedural hard-surface modeling, PBR metallic texturing in Quixel Mixer, and Cycles rendering.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-3d-animation-of-a-futuristic-sphere-34594-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1200&q=80', caption: '3D Turntable Animation' },
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80', caption: 'Wireframe & Clay Render Breakdown' }
+                        ]
+                    },
+                    {
+                        id: '3d-2',
+                        title: 'STEALTH AUDIO — PRODUCT CGI',
+                        type: 'image',
+                        category: 'Product CGI',
+                        specs: 'Blender • Quixel Mixer',
+                        url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
+                        fallbackImg: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80',
+                        desc: 'Studio rim-lighting exploration and custom micro-surface roughness maps for flagship hardware.',
+                        items: [
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1400&q=80', caption: 'Studio Product Shot' },
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-digital-waves-34474-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=80', caption: 'Material Texture Breakdown' }
+                        ]
+                    },
+                    {
+                        id: '3d-3',
+                        title: 'NEON SANCTUARY — ENVIRONMENT',
+                        type: 'image',
+                        category: '3D Environment',
+                        specs: 'Blender • Volumetrics',
+                        url: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80',
+                        fallbackImg: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80',
+                        desc: 'Sci-fi architectural environment study featuring wet asphalt reflections and volumetric fog.',
+                        items: [
+                            { type: 'image', url: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1400&q=80', caption: 'Environment Wide Render' }
+                        ]
+                    },
+                    {
+                        id: '3d-4',
+                        title: 'QUANTUM ENGINE — CGI COMMERCIAL',
+                        type: 'video',
+                        category: 'Commercial CGI',
+                        specs: '4K 60FPS • Cycles',
+                        url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-digital-waves-34474-large.mp4',
+                        fallbackImg: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=80',
+                        desc: 'Dynamic camera choreography and macro shader detailing for tech launch commercial.',
+                        items: [
+                            { type: 'video', url: 'https://assets.mixkit.co/videos/preview/mixkit-abstract-blue-digital-waves-34474-large.mp4', fallbackImg: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=1200&q=80', caption: 'Commercial Full Render' }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let portfolioData = loadPortfolioData();
+        let isEditMode = false;
+        let currentLedFilter = 'all';
+        let draftAlbumItems = [];
+        let activeLightboxProjectRef = null;
+
+        function loadPortfolioData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return JSON.parse(JSON.stringify(DEFAULT_DATA));
+                const parsed = JSON.parse(raw);
+                return {
+                    profile: { ...DEFAULT_DATA.profile, ...(parsed.profile || {}) },
+                    experiences: Array.isArray(parsed.experiences) ? parsed.experiences : JSON.parse(JSON.stringify(DEFAULT_DATA.experiences)),
+                    projects: {
+                        led: Array.isArray(parsed.projects?.led) ? parsed.projects.led : JSON.parse(JSON.stringify(DEFAULT_DATA.projects.led)),
+                        motion: Array.isArray(parsed.projects?.motion) ? parsed.projects.motion : JSON.parse(JSON.stringify(DEFAULT_DATA.projects.motion)),
+                        threeD: Array.isArray(parsed.projects?.threeD) ? parsed.projects.threeD : JSON.parse(JSON.stringify(DEFAULT_DATA.projects.threeD))
+                    }
+                };
+            } catch (err) {
+                return JSON.parse(JSON.stringify(DEFAULT_DATA));
+            }
+        }
+
+        function savePortfolioData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(portfolioData));
+            } catch (err) {
+                console.warn('Could not persist to localStorage:', err);
+            }
+            updateProjectCountBadge();
+        }
+
+        function saveAllPortfolioProgress() {
+            // Collect any live inline edits before saving
+            document.querySelectorAll('[data-editable="true"]').forEach(el => {
+                const field = el.dataset.field;
+                if (field && portfolioData.profile[field] !== undefined) {
+                    portfolioData.profile[field] = el.textContent.trim();
+                }
+            });
+            savePortfolioData();
+
+            // Export standalone HTML file with current modified portfolioData baked into DEFAULT_DATA
+            try {
+                const htmlContent = document.documentElement.outerHTML;
+                
+                // Deep clean/clone portfolio data ensuring all fallback images, album thumbnails and slide structures are preserved
+                const cleanExportData = JSON.parse(JSON.stringify(portfolioData));
+
+                // Replace the default data declaration block inside the cloned HTML string
+                const targetScriptRegex = /const DEFAULT_DATA = \{[\s\S]*?\};\n\s*let portfolioData/;
+                const updatedPortfolioString = `const DEFAULT_DATA = ${JSON.stringify(cleanExportData, null, 4)};\n        let portfolioData`;
+                
+                let standaloneHtml = htmlContent;
+                if (targetScriptRegex.test(htmlContent)) {
+                    standaloneHtml = htmlContent.replace(targetScriptRegex, updatedPortfolioString);
+                }
+
+                const blob = new Blob([`<!DOCTYPE html>\n<html lang="en">` + standaloneHtml.split('</html>')[0] + `</html>`], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'index.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(url), 2000);
+            } catch (err) {
+                console.error('Export download error:', err);
+            }
+
+            showToast('All changes saved & updated HTML downloaded with complete thumbnails!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMessage');
+            if (!toast || !msgEl) return;
+            msgEl.textContent = message;
+            toast.classList.remove('translate-x-[150%]');
+            clearTimeout(toast._hideTimer);
+            toast._hideTimer = setTimeout(() => {
+                toast.classList.add('translate-x-[150%]');
+            }, 2600);
+        }
+
+        // ==========================================
+        // 2. PROFILE, TYPEWRITER & REALTIME COUNT
+        // ==========================================
+        function renderProfile() {
+            const p = portfolioData.profile;
+            const nameEl = document.getElementById('profileName');
+            const navBrand = document.getElementById('navBrandName');
+            const footerName = document.getElementById('footerName');
+            const roleEl = document.getElementById('profileRole');
+            const bioEl = document.getElementById('profileBio');
+            const yearEl = document.getElementById('profileYear');
+            const cityEl = document.getElementById('profileCity');
+            const emailEl = document.getElementById('contactEmail');
+            const emailLink = document.getElementById('contactEmailLink');
+            const phoneEl = document.getElementById('contactPhone');
+            const phoneLink = document.getElementById('contactPhoneLink');
+            const fbLink = document.getElementById('socialFacebookLink');
+            const liLink = document.getElementById('socialLinkedinLink');
+            const bgVid = document.getElementById('bgAmbientVideo');
+
+            if (nameEl) nameEl.textContent = p.name;
+            if (navBrand) navBrand.textContent = p.name;
+            if (footerName) footerName.textContent = p.name;
+            if (roleEl) roleEl.textContent = p.role;
+            if (bioEl) bioEl.textContent = p.bio;
+            if (yearEl) yearEl.textContent = p.birthYear;
+            if (cityEl) cityEl.textContent = p.city;
+            if (emailEl) emailEl.textContent = p.email;
+            if (emailLink) emailLink.href = `mailto:${p.email}`;
+            if (phoneEl) phoneEl.textContent = p.phone;
+            if (phoneLink) phoneLink.href = `tel:${p.phone}`;
+            if (fbLink && p.facebook) fbLink.href = p.facebook;
+            if (liLink && p.linkedin) liLink.href = p.linkedin;
+            if (bgVid && p.bgVideoUrl && bgVid.src !== p.bgVideoUrl) {
+                bgVid.src = p.bgVideoUrl;
+            }
+
+            const inFb = document.getElementById('inputFacebookUrl');
+            const inLi = document.getElementById('inputLinkedinUrl');
+            const inBg = document.getElementById('inputBgVideoUrl');
+            if (inFb) inFb.value = p.facebook || '';
+            if (inLi) inLi.value = p.linkedin || '';
+            if (inBg) inBg.value = p.bgVideoUrl || '';
+
+            updateProjectCountBadge();
+        }
+
+        function updateProjectCountBadge() {
+            const badge = document.getElementById('projectCountBadge');
+            if (!badge) return;
+            const total =
+                (portfolioData.projects.led?.length || 0) +
+                (portfolioData.projects.motion?.length || 0) +
+                (portfolioData.projects.threeD?.length || 0);
+            badge.textContent = `${total} Project${total === 1 ? '' : 's'}`;
+        }
+
+        // ==========================================
+        // 3. EXPERIENCE TIMELINE RENDER & CRUD
+        // ==========================================
+        function formatMonthYear(ym) {
+            if (!ym) return 'Present';
+            const [y, m] = ym.split('-');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const idx = parseInt(m, 10) - 1;
+            return `${months[idx] || m} ${y}`;
+        }
+
+        function calculateDurationText(startYm, endYm, isCurrent) {
+            if (!startYm) return '—';
+            const [sy, sm] = startYm.split('-').map(Number);
+            let ey, em;
+            if (isCurrent || !endYm) {
+                const now = new Date();
+                ey = now.getFullYear();
+                em = now.getMonth() + 1;
+            } else {
+                [ey, em] = endYm.split('-').map(Number);
+            }
+            const totalMonths = Math.max(1, (ey - sy) * 12 + (em - sm) + 1);
+            const yrs = Math.floor(totalMonths / 12);
+            const mos = totalMonths % 12;
+            const parts = [];
+            if (yrs > 0) parts.push(`${yrs} yr${yrs > 1 ? 's' : ''}`);
+            if (mos > 0) parts.push(`${mos} mo${mos > 1 ? 's' : ''}`);
+            return parts.join(' ') || '1 mo';
+        }
+
+        function renderExperiences() {
+            const listEl = document.getElementById('experienceList');
+            if (!listEl) return;
+
+            listEl.innerHTML = portfolioData.experiences.map((exp, index) => {
+                const rangeStr = `${formatMonthYear(exp.startDate)} — ${exp.isCurrent ? 'Present' : formatMonthYear(exp.endDate)}`;
+                const durationStr = calculateDurationText(exp.startDate, exp.endDate, exp.isCurrent);
+                const beamDelay = `${-(index * 1.1).toFixed(1)}s`;
+                const lines = (exp.desc || '').split('\n').filter(Boolean).map(line =>
+                    `<p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">${escapeHtml(line)}</p>`
+                ).join('');
+
+                return `
+                    <div class="glow-border-card group bg-charcoal/85 backdrop-blur-md border border-slateborder rounded-2xl p-4 sm:px-6 sm:py-5 transition-all duration-300 hover:-translate-y-0.5">
+                        <div class="flex flex-col lg:flex-row lg:items-stretch justify-between gap-3.5 lg:gap-5">
+                            <div class="space-y-1.5 lg:w-[36%] shrink-0 flex flex-col justify-center">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-graphite border border-slateborder text-xs font-mono text-platinum">
+                                        <i data-lucide="calendar" class="w-3.5 h-3.5 text-silver"></i>
+                                        ${rangeStr}
+                                    </span>
+                                    <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-obsidian border border-slateborder text-[11px] font-mono text-silver">
+                                        <i data-lucide="clock" class="w-3 h-3 text-blue-400"></i>
+                                        ${durationStr}
+                                    </span>
+                                </div>
+                                <h4 class="text-base sm:text-lg font-bold tracking-wide text-platinum uppercase leading-snug">${escapeHtml(exp.company)}</h4>
+                                <p class="text-xs sm:text-sm font-medium text-silver">${escapeHtml(exp.role)}</p>
+                            </div>
+
+                            <!-- Luminous Running Divider Between Left & Right Info -->
+                            <div class="hidden lg:block exp-split-line-v" style="--beam-delay: ${beamDelay};"></div>
+                            <div class="block lg:hidden exp-split-line-h"></div>
+
+                            <div class="lg:flex-1 flex items-center justify-between gap-4">
+                                <div class="space-y-1">${lines}</div>
+                                <div class="${isEditMode ? 'flex' : 'hidden'} items-center gap-1.5 shrink-0">
+                                    <button onclick="openExperienceModal('${exp.id}')" class="p-2 rounded-xl bg-graphite hover:bg-zinc-700 text-platinum border border-slateborder transition" title="Edit">
+                                        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                    <button onclick="deleteExperience('${exp.id}')" class="p-2 rounded-xl bg-red-950/60 hover:bg-red-900/80 text-red-300 border border-red-800/60 transition" title="Delete">
+                                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function openExperienceModal(expId = null) {
+            const modal = document.getElementById('experienceFormModal');
+            const heading = document.getElementById('experienceModalHeading');
+            const idInput = document.getElementById('editExperienceId');
+            const startInput = document.getElementById('expStartDate');
+            const endInput = document.getElementById('expEndDate');
+            const currCheck = document.getElementById('expIsCurrent');
+            const compInput = document.getElementById('expCompany');
+            const roleInput = document.getElementById('expRole');
+            const descInput = document.getElementById('expDesc');
+
+            if (expId) {
+                const exp = portfolioData.experiences.find(e => e.id === expId);
+                if (!exp) return;
+                heading.textContent = 'Edit Work Experience';
+                idInput.value = exp.id;
+                startInput.value = exp.startDate || '';
+                endInput.value = exp.endDate || '';
+                currCheck.checked = !!exp.isCurrent;
+                compInput.value = exp.company || '';
+                roleInput.value = exp.role || '';
+                descInput.value = exp.desc || '';
+            } else {
+                heading.textContent = 'Add Work Experience';
+                idInput.value = '';
+                startInput.value = '2024-01';
+                endInput.value = '';
+                currCheck.checked = true;
+                compInput.value = '';
+                roleInput.value = '';
+                descInput.value = '';
+            }
+            toggleCurrentExperience();
+            modal.classList.remove('hidden');
+        }
+
+        function closeExperienceModal() {
+            document.getElementById('experienceFormModal')?.classList.add('hidden');
+        }
+
+        function toggleCurrentExperience() {
+            const curr = document.getElementById('expIsCurrent')?.checked;
+            const endInput = document.getElementById('expEndDate');
+            if (endInput) {
+                endInput.disabled = curr;
+                if (curr) endInput.value = '';
+            }
+            updateDurationPreview();
+        }
+
+        function updateDurationPreview() {
+            const start = document.getElementById('expStartDate')?.value;
+            const end = document.getElementById('expEndDate')?.value;
+            const curr = document.getElementById('expIsCurrent')?.checked;
+            const preview = document.getElementById('expDurationPreview');
+            if (preview) {
+                preview.textContent = calculateDurationText(start, end, curr);
+            }
+        }
+
+        function handleExperienceSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('editExperienceId').value;
+            const payload = {
+                id: id || `exp-${Date.now()}`,
+                startDate: document.getElementById('expStartDate').value,
+                endDate: document.getElementById('expEndDate').value,
+                isCurrent: document.getElementById('expIsCurrent').checked,
+                company: document.getElementById('expCompany').value.trim(),
+                role: document.getElementById('expRole').value.trim(),
+                desc: document.getElementById('expDesc').value.trim()
+            };
+
+            if (id) {
+                const idx = portfolioData.experiences.findIndex(item => item.id === id);
+                if (idx !== -1) portfolioData.experiences[idx] = payload;
+            } else {
+                portfolioData.experiences.unshift(payload);
+            }
+            savePortfolioData();
+            renderExperiences();
+            closeExperienceModal();
+            showToast('Work experience saved');
+        }
+
+        function deleteExperience(id) {
+            portfolioData.experiences = portfolioData.experiences.filter(item => item.id !== id);
+            savePortfolioData();
+            renderExperiences();
+            showToast('Experience removed');
+        }
+
+        // ==========================================
+        // 4. SHOWREEL SECTIONS & INFINITE CAROUSELS
+        // ==========================================
+        const DEFAULT_FALLBACK_IMAGES = [
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80'
+        ];
+
+        function getProjectFallbackImg(project, idx = 0) {
+            if (project && project.fallbackImg) return project.fallbackImg;
+            if (project && project.type === 'image' && project.url) return project.url;
+            return DEFAULT_FALLBACK_IMAGES[idx % DEFAULT_FALLBACK_IMAGES.length];
+        }
+
+        function handleVideoMediaError(videoEl, fallbackSrc) {
+            if (!videoEl || videoEl.dataset.fallbackApplied) return;
+            videoEl.dataset.fallbackApplied = 'true';
+            const img = document.createElement('img');
+            img.src = fallbackSrc;
+            img.alt = videoEl.getAttribute('data-title') || 'Showreel Preview';
+            img.className = videoEl.className;
+            img.onerror = function () {
+                this.onerror = null;
+                this.src = 'https://placehold.co/800x500/081226/94a3b8?text=Visual+Showreel';
+            };
+            videoEl.replaceWith(img);
+        }
+
+        function fileToPersistentDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                if (!file) {
+                    reject(new Error('No file provided'));
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onerror = () => reject(new Error('Failed to read file'));
+                reader.onload = (event) => {
+                    const dataUrl = event.target?.result;
+                    if (!file.type.startsWith('image/') || file.type === 'image/gif' || file.type === 'image/svg+xml') {
+                        resolve(dataUrl);
+                        return;
+                    }
+                    const img = new Image();
+                    img.onload = () => {
+                        const maxDim = 1600;
+                        let { width, height } = img;
+                        if (width > maxDim || height > maxDim) {
+                            if (width > height) {
+                                height = Math.round((height * maxDim) / width);
+                                width = maxDim;
+                            } else {
+                                width = Math.round((width * maxDim) / height);
+                                height = maxDim;
+                            }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        if (!ctx) {
+                            resolve(dataUrl);
+                            return;
+                        }
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const outputMime = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+                        resolve(canvas.toDataURL(outputMime, 0.88));
+                    };
+                    img.onerror = () => resolve(dataUrl);
+                    img.src = dataUrl;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function buildProjectCardHTML(project, sectionKey, idx = 0) {
+            const coverRawUrl = project.url || '';
+            const resolvedCover = normalizeGoogleDriveMediaUrl(coverRawUrl, project.type);
+            const isVideo = resolvedCover.type === 'video';
+            const slideCount = Array.isArray(project.items) && project.items.length > 0 ? project.items.length : 1;
+            const badgeText = slideCount > 1 ? `ALBUM • ${slideCount}` : (isVideo ? 'VIDEO' : 'STILL');
+            const subTag = project.specs || (isVideo ? '60FPS • LOOP' : '4K RENDER');
+            const fallbackSrc = escapeHtml(resolvedCover.thumbUrl || getProjectFallbackImg(project, idx));
+
+            const mediaMarkup = isVideo
+                ? `<img src="${fallbackSrc}" alt="${escapeHtml(project.title)}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"><video src="${escapeHtml(resolvedCover.directUrl)}" poster="${fallbackSrc}" data-title="${escapeHtml(project.title)}" preload="metadata" muted loop playsinline autoplay onerror="handleVideoMediaError(this, '${fallbackSrc}')" class="relative z-[1] w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></video>`
+                : `<img src="${escapeHtml(resolvedCover.directUrl)}" alt="${escapeHtml(project.title)}" onerror="this.onerror=null;this.src='${fallbackSrc}'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">`;
+
+            return `
+                <div class="carousel-slide-item">
+                    <article data-section="${sectionKey}" data-project-id="${project.id}" onclick="openLightbox('${sectionKey}', '${project.id}')" class="led-card glow-border-card group bg-charcoal/90 backdrop-blur-md border border-slateborder rounded-2xl overflow-hidden cursor-pointer flex flex-col">
+                        <div class="relative aspect-video bg-obsidian overflow-hidden">
+                            ${mediaMarkup}
+                            <div class="absolute inset-0 z-[2] bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent opacity-80 pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 z-[3] flex items-center gap-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-obsidian/85 backdrop-blur-md border border-slateborder text-[10px] font-mono uppercase tracking-wider text-platinum">
+                                    ${escapeHtml(badgeText)}
+                                </span>
+                            </div>
+                            <div class="absolute top-3 right-3 ${isEditMode ? 'flex' : 'hidden'} items-center gap-1.5 z-20" onclick="event.stopPropagation()">
+                                <button onclick="openProjectModal('${project.id}', '${sectionKey}')" class="p-1.5 rounded-lg bg-obsidian/90 hover:bg-zinc-700 text-platinum border border-slateborder transition" title="Edit">
+                                    <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <button onclick="deleteProject('${sectionKey}', '${project.id}')" class="p-1.5 rounded-lg bg-red-950/90 hover:bg-red-800 text-red-200 border border-red-800/70 transition" title="Delete">
+                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                            <div class="absolute bottom-3 right-3 z-[3] w-9 h-9 rounded-xl bg-platinum/90 text-obsidian flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
+                                <i data-lucide="layers" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-1.5">
+                                    <span class="text-[10px] font-mono uppercase tracking-widest text-blue-400">${escapeHtml(subTag)}</span>
+                                </div>
+                                <h3 class="text-sm sm:text-base font-bold text-platinum tracking-tight line-clamp-1 mb-1.5">${escapeHtml(project.title)}</h3>
+                                <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed">${escapeHtml(project.desc || '')}</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            `;
+        }
+
+        function renderSectionTrack(sectionKey, trackId) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+
+            let list = portfolioData.projects[sectionKey] || [];
+            if (sectionKey === 'led' && currentLedFilter !== 'all') {
+                list = list.filter(item => item.type === currentLedFilter);
+            }
+
+            if (list.length === 0) {
+                track.innerHTML = `<div class="px-6 py-10 text-xs font-mono text-zinc-500">No projects in this filter. Switch to Edit mode to add items.</div>`;
+                return;
+            }
+
+            // Repeat 3x so wide screens and fast drags never show empty edges
+            const repeatCount = list.length >= 3 ? 3 : 4;
+            const repeated = [];
+            for (let r = 0; r < repeatCount; r++) {
+                repeated.push(...list);
+            }
+            track.dataset.repeatCount = String(repeatCount);
+            track.innerHTML = repeated.map((p, idx) => buildProjectCardHTML(p, sectionKey, idx)).join('');
+            track.querySelectorAll('video').forEach(v => {
+                v.muted = true;
+                const playPromise = v.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function renderAllSections() {
+            renderExperiences();
+            renderSectionTrack('led', 'projectsGrid');
+            renderSectionTrack('motion', 'motionGrid');
+            renderSectionTrack('threeD', 'threeDGrid');
+            updateProjectCountBadge();
+        }
+
+        function filterProjects(filterType) {
+            currentLedFilter = filterType;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const active = btn.getAttribute('data-filter') === filterType;
+                btn.classList.toggle('active', active);
+                btn.classList.toggle('bg-graphite', active);
+                btn.classList.toggle('text-platinum', active);
+                btn.classList.toggle('shadow', active);
+                btn.classList.toggle('text-silver', !active);
+            });
+            renderSectionTrack('led', 'projectsGrid');
+        }
+
+        const carouselControllers = [];
+
+        function initShowreelCarousels() {
+            const configs = [
+                { viewportId: 'projectsCarouselViewport', trackId: 'projectsGrid', speed: 0.72 },
+                { viewportId: 'motionCarouselViewport', trackId: 'motionGrid', speed: -0.68 },
+                { viewportId: 'threeDCarouselViewport', trackId: 'threeDGrid', speed: 0.7 }
+            ];
+
+            configs.forEach(cfg => {
+                const viewport = document.getElementById(cfg.viewportId);
+                const track = document.getElementById(cfg.trackId);
+                if (!viewport || !track) return;
+
+                const state = {
+                    viewport,
+                    track,
+                    offset: 0,
+                    speed: cfg.speed,
+                    velocity: 0,
+                    isDragging: false,
+                    activePointerId: null,
+                    startX: 0,
+                    lastX: 0,
+                    lastMoveTime: 0,
+                    dragStartOffset: 0,
+                    moved: false,
+                    captured: false,
+                    downCard: null
+                };
+
+                viewport.addEventListener('pointerdown', (e) => {
+                    if (e.button !== 0 && e.pointerType === 'mouse') return;
+                    if (e.target.closest('button')) return;
+
+                    state.isDragging = true;
+                    state.activePointerId = e.pointerId;
+                    state.moved = false;
+                    state.captured = false;
+                    state.downCard = e.target.closest('article[data-project-id]');
+                    state.startX = e.clientX;
+                    state.lastX = e.clientX;
+                    state.lastMoveTime = performance.now();
+                    state.dragStartOffset = state.offset;
+                    state.velocity = 0;
+                });
+
+                viewport.addEventListener('pointermove', (e) => {
+                    if (!state.isDragging || e.pointerId !== state.activePointerId) return;
+                    const now = performance.now();
+                    const dx = e.clientX - state.startX;
+                    const stepDx = e.clientX - state.lastX;
+                    const dtMs = Math.max(1, now - state.lastMoveTime);
+
+                    if (Math.abs(dx) > 6) {
+                        state.moved = true;
+                        if (!state.captured) {
+                            state.captured = true;
+                            try {
+                                viewport.setPointerCapture(e.pointerId);
+                            } catch (_) {}
+                        }
+                    }
+
+                    if (state.moved) {
+                        state.offset = state.dragStartOffset + dx;
+                        state.velocity = (stepDx / dtMs) * (1000 / 120);
+                    }
+                    state.lastX = e.clientX;
+                    state.lastMoveTime = now;
+                });
+
+                function endPointerDrag(e) {
+                    if (!state.isDragging) return;
+                    if (e && state.activePointerId !== null && e.pointerId !== state.activePointerId) return;
+
+                    const wasMoved = state.moved;
+                    const clickedCard = state.downCard;
+
+                    state.isDragging = false;
+                    state.downCard = null;
+                    if (state.activePointerId !== null) {
+                        if (state.captured) {
+                            try {
+                                viewport.releasePointerCapture(state.activePointerId);
+                            } catch (_) {}
+                        }
+                        state.activePointerId = null;
+                        state.captured = false;
+                    }
+
+                    // Clamp inertia throw velocity so glide stays silky
+                    state.velocity = Math.max(-18, Math.min(18, state.velocity));
+
+                    if (wasMoved) {
+                        const suppressClick = (ev) => {
+                            ev.stopPropagation();
+                            ev.preventDefault();
+                        };
+                        viewport.addEventListener('click', suppressClick, { capture: true, once: true });
+                        setTimeout(() => {
+                            viewport.removeEventListener('click', suppressClick, { capture: true });
+                        }, 80);
+                    } else if (clickedCard && e && e.type === 'pointerup') {
+                        const sec = clickedCard.getAttribute('data-section');
+                        const pid = clickedCard.getAttribute('data-project-id');
+                        if (sec && pid) {
+                            const suppressNativeClick = (ev) => {
+                                ev.stopPropagation();
+                                ev.preventDefault();
+                            };
+                            viewport.addEventListener('click', suppressNativeClick, { capture: true, once: true });
+                            setTimeout(() => {
+                                viewport.removeEventListener('click', suppressNativeClick, { capture: true });
+                            }, 80);
+                            openLightbox(sec, pid, clickedCard);
+                        }
+                    }
+                }
+
+                viewport.addEventListener('pointerup', endPointerDrag);
+                viewport.addEventListener('pointercancel', endPointerDrag);
+                window.addEventListener('blur', () => {
+                    state.isDragging = false;
+                    state.activePointerId = null;
+                });
+
+                carouselControllers.push(state);
+            });
+
+            let lastTime = performance.now();
+            function animateCarousels(now) {
+                const dt = Math.min(32, now - lastTime) / (1000 / 120);
+                lastTime = now;
+
+                carouselControllers.forEach(st => {
+                    const repeatCount = Math.max(1, parseInt(st.track.dataset.repeatCount || '3', 10));
+                    const cycleWidth = st.track.scrollWidth / repeatCount;
+                    if (cycleWidth <= 0) return;
+
+                    if (!st.isDragging) {
+                        // Continuous auto-glide + smooth momentum decay after drag release (never freezes)
+                        st.offset += (st.velocity - st.speed * 0.55) * dt;
+                        st.velocity *= Math.pow(0.93, dt);
+                        if (Math.abs(st.velocity) < 0.01) st.velocity = 0;
+                    }
+
+                    // Seamless modulo wrap in [-cycleWidth, 0)
+                    st.offset = ((st.offset % cycleWidth) - cycleWidth) % cycleWidth;
+                    if (st.offset > 0) st.offset -= cycleWidth;
+
+                    st.track.style.transform = `translate3d(${st.offset.toFixed(2)}px, 0, 0)`;
+
+                    // Center-focus dynamic scaling: cards near viewport center scale up smoothly
+                    const vpRect = st.viewport.getBoundingClientRect();
+                    if (vpRect.width <= 0) return;
+                    const vpCenter = vpRect.left + vpRect.width * 0.5;
+                    const focusRadius = Math.max(260, vpRect.width * 0.42);
+                    const items = st.track.children;
+
+                    for (let i = 0; i < items.length; i++) {
+                        const item = items[i];
+                        const itemWidth = item.offsetWidth;
+                        if (!itemWidth) continue;
+
+                        const itemCenter = vpRect.left + st.offset + item.offsetLeft + itemWidth * 0.5;
+                        const dist = Math.abs(itemCenter - vpCenter);
+                        const ratio = Math.max(0, 1 - dist / focusRadius);
+                        // Smooth cosine bell curve for organic center zoom
+                        const eased = 0.5 - 0.5 * Math.cos(ratio * Math.PI);
+
+                        const scale = 0.91 + eased * 0.18; // 0.91 at edges -> 1.09 at center
+                        const opacity = 0.68 + eased * 0.32; // 0.68 at edges -> 1.0 at center
+                        const translateY = -eased * 6;
+
+                        item.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
+                        item.style.opacity = opacity.toFixed(3);
+                        item.style.zIndex = eased > 0.55 ? '10' : '1';
+                        item.classList.toggle('is-center-focus', eased > 0.68);
+                    }
+                });
+
+                requestAnimationFrame(animateCarousels);
+            }
+            requestAnimationFrame(animateCarousels);
+        }
+
+        // ==========================================
+        // 5. LIGHTBOX & ALBUM VIEWER (MORPH IN / OUT)
+        // ==========================================
+        let activeLightboxSource = null;
+        let isLightboxClosing = false;
+
+        function findVisibleAlbumCard(sectionKey, projectId, preferredEl = null) {
+            if (preferredEl && document.body.contains(preferredEl)) return preferredEl;
+            const candidates = Array.from(
+                document.querySelectorAll(`article[data-section="${sectionKey}"][data-project-id="${projectId}"]`)
+            );
+            if (!candidates.length) return null;
+            const vpCenter = window.innerWidth * 0.5;
+            return candidates.reduce((best, el) => {
+                const r = el.getBoundingClientRect();
+                const dist = Math.abs(r.left + r.width * 0.5 - vpCenter);
+                return !best || dist < best.dist ? { el, dist } : best;
+            }, null)?.el || candidates[0];
+        }
+
+        function computeMorphTransform(panelRect, sourceCard) {
+            if (!sourceCard) {
+                return 'translate3d(0, 26px, 0) scale(0.92)';
+            }
+            const cardRect = sourceCard.getBoundingClientRect();
+            if (cardRect.width <= 0 || cardRect.height <= 0 || panelRect.width <= 0 || panelRect.height <= 0) {
+                return 'translate3d(0, 26px, 0) scale(0.92)';
+            }
+            const dx = (cardRect.left + cardRect.width * 0.5) - (panelRect.left + panelRect.width * 0.5);
+            const dy = (cardRect.top + cardRect.height * 0.5) - (panelRect.top + panelRect.height * 0.5);
+            const sx = Math.max(0.22, Math.min(0.85, cardRect.width / panelRect.width));
+            const sy = Math.max(0.22, Math.min(0.85, cardRect.height / panelRect.height));
+            const uniformScale = Math.min(sx, sy);
+            return `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${uniformScale.toFixed(4)})`;
+        }
+
+        function openLightbox(sectionKey, projectId, sourceEl = null) {
+            const list = portfolioData.projects[sectionKey] || [];
+            const project = list.find(p => p.id === projectId);
+            if (!project) return;
+
+            activeLightboxProjectRef = { sectionKey, projectId };
+            isLightboxClosing = false;
+            const sourceCard = findVisibleAlbumCard(sectionKey, projectId, sourceEl);
+            activeLightboxSource = { sectionKey, projectId, el: sourceCard };
+
+            const modal = document.getElementById('lightboxModal');
+            const panel = document.getElementById('lightboxPanel');
+            const badge = document.getElementById('lightboxBadge');
+            const title = document.getElementById('lightboxTitle');
+            const desc = document.getElementById('lightboxDesc');
+            const container = document.getElementById('lightboxMediaContainer');
+            const counter = document.getElementById('lightboxSlideCounter');
+            const addMediaBtn = document.getElementById('lightboxAddMediaBtn');
+
+            if (addMediaBtn) {
+                addMediaBtn.classList.toggle('hidden', !isEditMode);
+                addMediaBtn.style.display = isEditMode ? 'inline-flex' : 'none';
+            }
+
+            const sectionNames = { led: 'VISUAL LED', motion: 'MOTION GRAPHICS', threeD: '3D / CGI' };
+            badge.textContent = sectionNames[sectionKey] || 'SHOWREEL';
+            title.textContent = project.title;
+            desc.textContent = project.desc || '';
+
+            const rawSlides = (Array.isArray(project.items) && project.items.length > 0)
+                ? project.items
+                : [{ type: project.type, url: project.url, fallbackImg: project.fallbackImg, caption: project.title }];
+
+            // Normalize Google Drive links and automatically separate Videos (MP4/MOV) & Images (JPG/PNG)
+            const normalizedSlides = rawSlides.map((item, originalIdx) => {
+                const resolved = normalizeGoogleDriveMediaUrl(item.url, item.type, item.caption || item.fileName || '');
+                return {
+                    ...item,
+                    originalIdx,
+                    detectedType: resolved.type,
+                    directUrl: resolved.directUrl,
+                    thumbUrl: resolved.thumbUrl || item.fallbackImg || getProjectFallbackImg(project, originalIdx)
+                };
+            });
+
+            const videoSlides = normalizedSlides.filter(s => s.detectedType === 'video');
+            const imageSlides = normalizedSlides.filter(s => s.detectedType !== 'video');
+
+            if (counter) {
+                counter.textContent = `${videoSlides.length} Video${videoSlides.length === 1 ? '' : 's'} • ${imageSlides.length} Photo${imageSlides.length === 1 ? '' : 's'}`;
+            }
+
+            function renderMediaGroup(groupTitle, groupBadge, items, delayOffset = 0) {
+                if (!items.length) return '';
+                const groupCards = items.map((item, idx) => {
+                    const fallbackSrc = escapeHtml(item.thumbUrl);
+                    const isVid = item.detectedType === 'video';
+                    const mediaEl = isVid
+                        ? `<video src="${escapeHtml(item.directUrl)}" poster="${fallbackSrc}" data-title="${escapeHtml(project.title)}" controls autoplay loop muted playsinline onerror="handleVideoMediaError(this, '${fallbackSrc}')" class="w-full max-h-[68vh] object-contain mx-auto bg-black"></video>`
+                        : `<img src="${escapeHtml(item.directUrl)}" alt="${escapeHtml(project.title)}" onerror="this.onerror=null;this.src='${fallbackSrc}'" class="w-full max-h-[68vh] object-contain mx-auto bg-black">`;
+
+                    const deleteSlideBtn = isEditMode && normalizedSlides.length > 1
+                        ? `<button onclick="deleteAlbumSlide('${sectionKey}', '${projectId}', ${item.originalIdx})" class="px-2.5 py-1 rounded-lg bg-red-950/80 hover:bg-red-900 text-red-200 border border-red-800/60 text-xs font-mono transition flex items-center gap-1 shadow"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>Delete Slide</button>`
+                        : '';
+
+                    const actionToolbar = isEditMode
+                        ? `<div class="px-6 py-2.5 bg-obsidian/90 border-t border-slateborder/60 text-xs font-mono text-silver flex items-center justify-between gap-2"><span>${groupBadge} ${idx + 1}/${items.length}</span>${deleteSlideBtn}</div>`
+                        : '';
+
+                    const delay = `${90 + (delayOffset + idx) * 75}ms`;
+                    return `<div class="lightbox-slide-item bg-charcoal/40 border border-slateborder/80 rounded-2xl overflow-hidden shadow-xl mb-6 last:mb-0" style="--slide-delay: ${delay};">${mediaEl}${actionToolbar}</div>`;
+                }).join('');
+
+                return `
+                    <div class="mb-8 last:mb-0">
+                        <div class="flex items-center justify-between gap-3 mb-4 pb-2 border-b border-slateborder/70">
+                            <span class="text-xs font-mono uppercase tracking-widest text-platinum font-semibold">${groupTitle}</span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-graphite border border-slateborder text-[11px] font-mono text-silver">${items.length} ${groupBadge}</span>
+                        </div>
+                        <div>${groupCards}</div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `<div class="p-4 sm:p-6">${
+                renderMediaGroup('VIDEOS (MP4 / MOV)', 'VIDEO', videoSlides, 0) +
+                renderMediaGroup('IMAGES (JPG / PNG)', 'IMAGE', imageSlides, videoSlides.length)
+            }</div>`;
+
+            // Set initial FLIP morph state from the clicked album card
+            panel.style.transition = 'none';
+            panel.style.opacity = '0';
+            panel.style.transform = 'translate3d(0, 24px, 0) scale(0.92)';
+
+            modal.classList.remove('hidden');
+            modal.classList.add('opacity-0');
+
+            // Measure target panel rect & compute exact origin transform
+            const panelRect = panel.getBoundingClientRect();
+            const originTransform = computeMorphTransform(panelRect, sourceCard);
+            panel.style.transform = originTransform;
+
+            // Force reflow then animate smoothly to center stage
+            void panel.offsetWidth;
+
+            requestAnimationFrame(() => {
+                panel.style.transition = 'transform 0.54s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.54s ease';
+                modal.classList.remove('opacity-0');
+                panel.style.opacity = '1';
+                panel.style.transform = 'translate3d(0, 0, 0) scale(1)';
+            });
+        }
+
+        // ==========================================
+        // GOOGLE DRIVE LINK PARSER & FOLDER RESOLVER
+        // ==========================================
+        function extractGoogleDriveId(rawUrl) {
+            if (!rawUrl) return null;
+            const str = String(rawUrl).trim();
+            // Folder link: https://drive.google.com/drive/folders/FOLDER_ID
+            const folderMatch = str.match(/drive\.google\.com\/(?:drive\/(?:u\/\d+\/)?folders\/|open\?id=)([a-zA-Z0-9_-]{15,})/);
+            if (folderMatch && str.includes('/folders/')) {
+                return { kind: 'folder', id: folderMatch[1] };
+            }
+            // File link: /file/d/FILE_ID/ or ?id=FILE_ID or uc?id=FILE_ID
+            const fileMatch = str.match(/(?:\/file\/d\/|\/d\/|[?&]id=|lh3\.googleusercontent\.com\/d\/)([a-zA-Z0-9_-]{15,})/);
+            if (fileMatch) {
+                return { kind: 'file', id: fileMatch[1] };
+            }
+            return null;
+        }
+
+        function detectMediaTypeFromMeta(urlOrName = '', fallbackType = 'image') {
+            const lower = String(urlOrName).toLowerCase();
+            if (/\.(mp4|mov|m4v|webm|avi|mkv)(\?|#|$|\s)/i.test(lower) || lower.includes('video')) {
+                return 'video';
+            }
+            if (/\.(jpg|jpeg|png|webp|gif)(\?|#|$|\s)/i.test(lower)) {
+                return 'image';
+            }
+            return fallbackType === 'video' ? 'video' : 'image';
+        }
+
+        function normalizeGoogleDriveMediaUrl(rawUrl, explicitType = null, hintName = '') {
+            const trimmed = String(rawUrl || '').trim();
+            const parsed = extractGoogleDriveId(trimmed);
+            const detectedType = detectMediaTypeFromMeta(`${trimmed} ${hintName}`, explicitType || 'image');
+
+            if (parsed && parsed.kind === 'file') {
+                const fileId = parsed.id;
+                const thumbUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
+                // Use Google Drive thumbnail CDN for images and direct download/export stream for videos
+                const directUrl = detectedType === 'video'
+                    ? `https://drive.google.com/uc?export=download&id=${fileId}`
+                    : thumbUrl;
+                return {
+                    type: detectedType,
+                    directUrl,
+                    thumbUrl,
+                    driveId: fileId
+                };
+            }
+
+            return {
+                type: detectedType,
+                directUrl: trimmed,
+                thumbUrl: detectedType === 'image' ? trimmed : ''
+            };
+        }
+
+        async function parseGoogleDriveInputLines(rawText, defaultCaption = '') {
+            const tokens = String(rawText || '')
+                .split(/[\n,;]+/)
+                .map(t => t.trim())
+                .filter(Boolean);
+
+            const results = [];
+            for (const token of tokens) {
+                // Allow optional "Name | URL" or plain URL
+                const parts = token.split('|').map(s => s.trim());
+                const customLabel = parts.length > 1 ? parts[0] : '';
+                const urlPart = parts.length > 1 ? parts[1] : parts[0];
+
+                const driveInfo = extractGoogleDriveId(urlPart);
+                if (driveInfo && driveInfo.kind === 'folder') {
+                    const folderItems = await fetchPublicGoogleDriveFolderItems(driveInfo.id, customLabel || defaultCaption);
+                    results.push(...folderItems);
+                } else {
+                    const resolved = normalizeGoogleDriveMediaUrl(urlPart, null, customLabel || defaultCaption);
+                    results.push({
+                        type: resolved.type,
+                        url: urlPart,
+                        fallbackImg: resolved.thumbUrl,
+                        caption: customLabel || defaultCaption || (resolved.type === 'video' ? 'Drive Video (MP4/MOV)' : 'Drive Image (JPG/PNG)')
+                    });
+                }
+            }
+            return results;
+        }
+
+        async function fetchPublicGoogleDriveFolderItems(folderId, fallbackLabel = '') {
+            // Attempt to inspect public Google Drive embeddedfolderview HTML via CORS-safe public endpoints
+            const embedUrl = `https://drive.google.com/embeddedfolderview?id=${folderId}#list`;
+            const proxyUrls = [
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(embedUrl)}`,
+                `https://corsproxy.io/?${encodeURIComponent(embedUrl)}`
+            ];
+
+            let html = '';
+            for (const proxy of proxyUrls) {
+                try {
+                    const res = await fetch(proxy);
+                    if (res.ok) {
+                        const text = await res.text();
+                        if (text && text.includes('flip-entry')) {
+                            html = text;
+                            break;
+                        }
+                    }
+                } catch (_) {}
+            }
+
+            if (!html) {
+                showToast('Folder is private or blocked by CORS — please share folder as "Anyone with link" or paste file links');
+                return [];
+            }
+
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const entries = Array.from(doc.querySelectorAll('.flip-entry'));
+            const extracted = [];
+
+            entries.forEach(entry => {
+                const entryId = (entry.id || '').replace(/^entry-/, '');
+                const titleEl = entry.querySelector('.flip-entry-title');
+                const fileName = (titleEl?.textContent || '').trim();
+                if (!entryId || !fileName) return;
+
+                if (/\.(jpg|jpeg|png)$/i.test(fileName)) {
+                    const fileUrl = `https://drive.google.com/file/d/${entryId}/view`;
+                    extracted.push({
+                        type: 'image',
+                        url: fileUrl,
+                        fallbackImg: `https://drive.google.com/thumbnail?id=${entryId}&sz=w1600`,
+                        caption: fileName
+                    });
+                } else if (/\.(mp4|mov)$/i.test(fileName)) {
+                    const fileUrl = `https://drive.google.com/file/d/${entryId}/view`;
+                    extracted.push({
+                        type: 'video',
+                        url: fileUrl,
+                        fallbackImg: `https://drive.google.com/thumbnail?id=${entryId}&sz=w1600`,
+                        caption: fileName
+                    });
+                }
+            });
+
+            // Sort videos first, then images
+            extracted.sort((a, b) => (a.type === b.type ? 0 : a.type === 'video' ? -1 : 1));
+            return extracted;
+        }
+
+        function openAddMediaToCurrentAlbum() {
+            const linksInput = document.getElementById('quickDriveLinksInput');
+            const captionInput = document.getElementById('quickMediaCaption');
+            if (linksInput) linksInput.value = '';
+            if (captionInput) captionInput.value = '';
+            document.getElementById('quickAddMediaModal')?.classList.remove('hidden');
+        }
+
+        function closeQuickAddMediaModal() {
+            document.getElementById('quickAddMediaModal')?.classList.add('hidden');
+        }
+
+        async function handleQuickAddMediaSubmit(e) {
+            e.preventDefault();
+            if (!activeLightboxProjectRef) return;
+            const { sectionKey, projectId } = activeLightboxProjectRef;
+            const list = portfolioData.projects[sectionKey] || [];
+            const proj = list.find(p => p.id === projectId);
+            if (!proj) return;
+
+            const linksRaw = document.getElementById('quickDriveLinksInput')?.value.trim() || '';
+            const captionInput = document.getElementById('quickMediaCaption')?.value.trim() || '';
+
+            if (!linksRaw) {
+                showToast('Please paste a Google Drive folder link or file links');
+                return;
+            }
+
+            if (!Array.isArray(proj.items)) {
+                proj.items = [{ type: proj.type, url: proj.url, fallbackImg: proj.fallbackImg, caption: proj.title }];
+            }
+
+            showToast('Reading Google Drive links...');
+            const parsedItems = await parseGoogleDriveInputLines(linksRaw, captionInput);
+
+            if (!parsedItems.length) {
+                showToast('No JPG/PNG or MP4/MOV items found in link');
+                return;
+            }
+
+            proj.items.push(...parsedItems);
+            // Auto-sort album items: videos (MP4/MOV) first, images (JPG/PNG) second
+            proj.items.sort((a, b) => (a.type === b.type ? 0 : a.type === 'video' ? -1 : 1));
+
+            savePortfolioData();
+            renderAllSections();
+            closeQuickAddMediaModal();
+
+            openLightbox(sectionKey, projectId, activeLightboxSource?.el);
+            showToast(`Added ${parsedItems.length} Google Drive item(s) to album`);
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightboxModal');
+            const panel = document.getElementById('lightboxPanel');
+            if (!modal || !panel || modal.classList.contains('hidden') || isLightboxClosing) return;
+
+            isLightboxClosing = true;
+
+            const targetCard = activeLightboxSource
+                ? findVisibleAlbumCard(activeLightboxSource.sectionKey, activeLightboxSource.projectId, activeLightboxSource.el)
+                : null;
+            const panelRect = panel.getBoundingClientRect();
+            const returnTransform = computeMorphTransform(panelRect, targetCard);
+
+            // Pause videos smoothly while morphing out
+            panel.querySelectorAll('video').forEach(v => {
+                try { v.pause(); } catch (_) {}
+            });
+
+            // Re-apply explicit transition for closing animation out
+            panel.style.transition = 'transform 0.46s cubic-bezier(0.32, 0, 0.24, 1), opacity 0.38s cubic-bezier(0.32, 0, 0.24, 1)';
+            panel.style.transform = returnTransform;
+            panel.style.opacity = '0';
+            modal.classList.add('opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                panel.style.transition = '';
+                panel.style.transform = '';
+                panel.style.opacity = '';
+                const container = document.getElementById('lightboxMediaContainer');
+                if (container) container.innerHTML = '';
+
+                // Trigger smooth landing bounce on the destination album card
+                if (targetCard) {
+                    targetCard.classList.remove('card-landing-bounce');
+                    void targetCard.offsetWidth;
+                    targetCard.classList.add('card-landing-bounce');
+                    setTimeout(() => {
+                        targetCard.classList.remove('card-landing-bounce');
+                    }, 680);
+                }
+
+                activeLightboxSource = null;
+                isLightboxClosing = false;
+            }, 440);
+        }
+
+        // ==========================================
+        // 6. PROJECT ADD / EDIT MODAL & EDIT MODE
+        // ==========================================
+        function openProjectModal(projectId = null, sectionKey = 'led') {
+            const modal = document.getElementById('projectFormModal');
+            const heading = document.getElementById('projectModalHeading');
+            const idInput = document.getElementById('editProjectId');
+            const secInput = document.getElementById('editProjectSection');
+            const titleInput = document.getElementById('projTitle');
+            const typeInput = document.getElementById('projType');
+            const urlInput = document.getElementById('projUrl');
+            const driveLinksInput = document.getElementById('driveAlbumSourceLinks');
+            const descInput = document.getElementById('projDesc');
+            const catInput = document.getElementById('projCategory');
+            const specsInput = document.getElementById('projSpecs');
+            const motionMeta = document.getElementById('motionMetaWrapper');
+            const albumWrapper = document.getElementById('albumItemsWrapper');
+
+            secInput.value = sectionKey;
+            if (driveLinksInput) driveLinksInput.value = '';
+
+            motionMeta.classList.toggle('hidden', sectionKey === 'led');
+            albumWrapper?.classList.remove('hidden');
+
+            if (projectId) {
+                const proj = (portfolioData.projects[sectionKey] || []).find(p => p.id === projectId);
+                if (!proj) return;
+                heading.textContent = 'Edit Project Album';
+                idInput.value = proj.id;
+                titleInput.value = proj.title || '';
+                typeInput.value = proj.type || 'image';
+                urlInput.value = proj.url || '';
+                descInput.value = proj.desc || '';
+                catInput.value = proj.category || '';
+                specsInput.value = proj.specs || '';
+                draftAlbumItems = JSON.parse(JSON.stringify(proj.items || []));
+            } else {
+                heading.textContent = 'Add Project Album';
+                idInput.value = '';
+                titleInput.value = '';
+                typeInput.value = 'image';
+                urlInput.value = '';
+                descInput.value = '';
+                catInput.value = '';
+                specsInput.value = '';
+                draftAlbumItems = [];
+            }
+
+            renderDraftAlbumItems();
+            modal.classList.remove('hidden');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectFormModal')?.classList.add('hidden');
+        }
+
+        function renderDraftAlbumItems() {
+            const list = document.getElementById('albumItemsEditorList');
+            const countLabel = document.getElementById('albumItemCountLabel');
+            if (!list || !countLabel) return;
+            const vidCount = draftAlbumItems.filter(i => i.type === 'video').length;
+            const imgCount = draftAlbumItems.filter(i => i.type !== 'video').length;
+            countLabel.textContent = `${vidCount} Video • ${imgCount} Image`;
+            list.innerHTML = draftAlbumItems.map((item, idx) => {
+                const resolved = normalizeGoogleDriveMediaUrl(item.url, item.type, item.caption || '');
+                const previewThumb = resolved.thumbUrl
+                    ? `<img src="${escapeHtml(resolved.thumbUrl)}" alt="" class="w-8 h-8 rounded object-cover border border-slateborder shrink-0">`
+                    : `<span class="w-8 h-8 rounded bg-graphite border border-slateborder flex items-center justify-center text-[10px] font-mono text-platinum shrink-0">${item.type === 'video' ? 'VID' : 'IMG'}</span>`;
+                return `
+                <div class="flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-obsidian border border-slateborder text-xs">
+                    <div class="flex items-center gap-2 min-w-0">
+                        ${previewThumb}
+                        <span class="truncate text-platinum max-w-[160px] sm:max-w-[230px]">[${item.type.toUpperCase()}] ${escapeHtml(item.caption || 'Drive Media ' + (idx + 1))}</span>
+                    </div>
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button type="button" onclick="moveDraftAlbumItem(${idx}, -1)" ${idx === 0 ? 'disabled class="opacity-30 cursor-not-allowed p-1"' : 'class="p-1 hover:text-white text-silver transition"'} title="Move Up">↑</button>
+                        <button type="button" onclick="moveDraftAlbumItem(${idx}, 1)" ${idx === draftAlbumItems.length - 1 ? 'disabled class="opacity-30 cursor-not-allowed p-1"' : 'class="p-1 hover:text-white text-silver transition"'} title="Move Down">↓</button>
+                        <button type="button" onclick="removeDraftAlbumItem(${idx})" class="px-2 py-1 rounded bg-red-950/80 text-red-300 hover:bg-red-900 transition">Remove</button>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function deleteAlbumSlide(sectionKey, projectId, slideIdx) {
+            const list = portfolioData.projects[sectionKey] || [];
+            const proj = list.find(p => p.id === projectId);
+            if (!proj || !Array.isArray(proj.items) || proj.items.length <= 1) {
+                showToast('Cannot delete the last remaining slide');
+                return;
+            }
+            proj.items.splice(slideIdx, 1);
+            savePortfolioData();
+            renderAllSections();
+            openLightbox(sectionKey, projectId, activeLightboxSource?.el);
+            showToast('Album slide removed');
+        }
+
+        async function importGoogleDriveLinksToDraft() {
+            const textarea = document.getElementById('driveAlbumSourceLinks');
+            const btn = document.getElementById('btnParseDriveLinks');
+            const rawText = textarea?.value.trim() || '';
+            if (!rawText) {
+                showToast('Paste a Google Drive folder link or file links first');
+                return;
+            }
+
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = 'Loading...';
+            }
+
+            const newItems = await parseGoogleDriveInputLines(rawText);
+
+            if (btn) {
+                btn.disabled = false;
+                btn.textContent = '+ Load From Google Drive';
+            }
+
+            if (!newItems.length) {
+                return;
+            }
+
+            draftAlbumItems.push(...newItems);
+            // Automatically sort videos (MP4/MOV) separate from images (JPG/PNG)
+            draftAlbumItems.sort((a, b) => (a.type === b.type ? 0 : a.type === 'video' ? -1 : 1));
+            if (textarea) textarea.value = '';
+            renderDraftAlbumItems();
+            showToast(`Loaded ${newItems.length} item(s) from Google Drive`);
+        }
+
+        function removeDraftAlbumItem(idx) {
+            draftAlbumItems.splice(idx, 1);
+            renderDraftAlbumItems();
+        }
+
+        function moveDraftAlbumItem(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= draftAlbumItems.length) return;
+            const temp = draftAlbumItems[idx];
+            draftAlbumItems[idx] = draftAlbumItems[targetIdx];
+            draftAlbumItems[targetIdx] = temp;
+            renderDraftAlbumItems();
+        }
+
+        async function handleProjectSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('editProjectId').value;
+            const sectionKey = document.getElementById('editProjectSection').value || 'led';
+            const title = document.getElementById('projTitle').value.trim();
+            const selectedCoverType = document.getElementById('projType').value;
+            const rawCoverUrl = document.getElementById('projUrl').value.trim() || 'https://placehold.co/800x500/081226/94a3b8?text=Showreel+Preview';
+            const desc = document.getElementById('projDesc').value.trim();
+            const category = document.getElementById('projCategory').value.trim();
+            const specs = document.getElementById('projSpecs').value.trim();
+
+            // If user left un-imported links in the textarea, automatically import them before saving
+            const pendingDriveText = document.getElementById('driveAlbumSourceLinks')?.value.trim() || '';
+            if (pendingDriveText) {
+                const pendingItems = await parseGoogleDriveInputLines(pendingDriveText);
+                draftAlbumItems.push(...pendingItems);
+            }
+
+            const resolvedCover = normalizeGoogleDriveMediaUrl(rawCoverUrl, selectedCoverType, title);
+            const coverType = selectedCoverType || resolvedCover.type;
+
+            // Ensure draft items has at least cover media if empty, and auto-group videos & images
+            if (draftAlbumItems.length === 0) {
+                draftAlbumItems.push({
+                    type: coverType,
+                    url: rawCoverUrl,
+                    fallbackImg: resolvedCover.thumbUrl,
+                    caption: title
+                });
+            } else {
+                draftAlbumItems.sort((a, b) => (a.type === b.type ? 0 : a.type === 'video' ? -1 : 1));
+            }
+
+            const payload = {
+                id: id || `${sectionKey}-${Date.now()}`,
+                title,
+                type: coverType,
+                url: rawCoverUrl,
+                fallbackImg: resolvedCover.thumbUrl,
+                desc,
+                category,
+                specs,
+                items: draftAlbumItems
+            };
+
+            const arr = portfolioData.projects[sectionKey];
+            if (id) {
+                const idx = arr.findIndex(p => p.id === id);
+                if (idx !== -1) arr[idx] = payload;
+            } else {
+                arr.unshift(payload);
+            }
+
+            savePortfolioData();
+            renderAllSections();
+            closeProjectModal();
+            showToast('Google Drive album saved');
+        }
+
+        function deleteProject(sectionKey, projectId) {
+            portfolioData.projects[sectionKey] = (portfolioData.projects[sectionKey] || []).filter(p => p.id !== projectId);
+            savePortfolioData();
+            renderAllSections();
+            showToast('Project deleted');
+        }
+
+        function toggleEditMode(forceState = null) {
+            isEditMode = forceState !== null ? forceState : !isEditMode;
+            document.body.classList.toggle('edit-mode-active', isEditMode);
+
+            const banner = document.getElementById('editBanner');
+            const editText = document.getElementById('toggleEditText');
+            const socialBox = document.getElementById('socialEditBox');
+            const addBtns = ['addProjectBtn', 'addMotionBtn', 'addThreeDBtn', 'addExperienceBtn'];
+
+            banner?.classList.toggle('hidden', !isEditMode);
+            socialBox?.classList.toggle('hidden', !isEditMode);
+            if (editText) editText.textContent = isEditMode ? 'Editing...' : 'Edit';
+            addBtns.forEach(btnId => {
+                document.getElementById(btnId)?.classList.toggle('hidden', !isEditMode);
+            });
+
+            document.querySelectorAll('[data-editable="true"]').forEach(el => {
+                el.contentEditable = isEditMode ? 'true' : 'false';
+            });
+
+            renderAllSections();
+            showToast(isEditMode ? 'Direct edit mode enabled' : 'Changes saved');
+        }
+
+        function saveAndExitEditMode() {
+            document.querySelectorAll('[data-editable="true"]').forEach(el => {
+                const field = el.dataset.field;
+                if (field && portfolioData.profile[field] !== undefined) {
+                    portfolioData.profile[field] = el.textContent.trim();
+                }
+            });
+            savePortfolioData();
+            renderProfile(false);
+            toggleEditMode(false);
+        }
+
+        function resetPortfolio() {
+            localStorage.removeItem(STORAGE_KEY);
+            portfolioData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            renderProfile(false);
+            renderAllSections();
+            showToast('Portfolio reset to default');
+        }
+
+        function updateSocialUrl(platform, value) {
+            portfolioData.profile[platform] = value.trim();
+            savePortfolioData();
+            renderProfile(false);
+        }
+
+        function updateBgVideoUrl(value) {
+            portfolioData.profile.bgVideoUrl = value.trim();
+            savePortfolioData();
+            renderProfile(false);
+        }
+
+        function copyContact(field) {
+            const val = portfolioData.profile[field] || '';
+            if (!val) return;
+            const temp = document.createElement('textarea');
+            temp.value = val;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast(`Copied ${field}: ${val}`);
+        }
+
+        function escapeHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // ==========================================
+        // 7. AMBIENT PARTICLES, CURSOR ECHO & SCROLL REVEAL
+        // ==========================================
+        const interactivePointer = {
+            x: window.innerWidth * 0.5,
+            y: window.innerHeight * 0.25,
+            smoothX: window.innerWidth * 0.5,
+            smoothY: window.innerHeight * 0.25,
+            active: false,
+            speed: 0
+        };
+
+        function initCursorEchoAndBackgroundInteraction() {
+            const cursorGlow = document.getElementById('cyntchCursorGlow');
+            const interactiveGrid = document.getElementById('cyntchInteractiveGrid');
+
+            window.addEventListener('pointermove', (e) => {
+                const dx = e.clientX - interactivePointer.x;
+                const dy = e.clientY - interactivePointer.y;
+                interactivePointer.speed = Math.min(35, Math.hypot(dx, dy));
+                interactivePointer.x = e.clientX;
+                interactivePointer.y = e.clientY;
+                interactivePointer.active = true;
+            }, { passive: true });
+
+            window.addEventListener('pointerdown', (e) => {
+                interactivePointer.x = e.clientX;
+                interactivePointer.y = e.clientY;
+                interactivePointer.active = true;
+            }, { passive: true });
+
+            document.addEventListener('mouseleave', () => {
+                interactivePointer.active = false;
+                if (interactiveGrid) interactiveGrid.style.opacity = '0';
+            });
+
+            let lastFrameTime = performance.now();
+
+            function renderCursorLight(now) {
+                const dt = Math.min(32, now - lastFrameTime) / (1000 / 120);
+                lastFrameTime = now;
+
+                // Smooth, gentle ambient light interpolation following cursor
+                interactivePointer.smoothX += (interactivePointer.x - interactivePointer.smoothX) * (0.11 * dt);
+                interactivePointer.smoothY += (interactivePointer.y - interactivePointer.smoothY) * (0.11 * dt);
+                interactivePointer.speed *= Math.pow(0.92, dt);
+
+                if (cursorGlow) {
+                    const glowIntensity = interactivePointer.active ? 0.12 : 0.06;
+                    cursorGlow.style.background = `radial-gradient(540px circle at ${interactivePointer.smoothX.toFixed(1)}px ${interactivePointer.smoothY.toFixed(1)}px, rgba(59, 130, 246, ${glowIntensity}), rgba(29, 78, 216, 0.035) 45%, transparent 72%)`;
+                }
+                if (interactiveGrid && interactivePointer.active) {
+                    const maskVal = `radial-gradient(240px circle at ${interactivePointer.smoothX.toFixed(1)}px ${interactivePointer.smoothY.toFixed(1)}px, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.28) 55%, transparent 100%)`;
+                    interactiveGrid.style.opacity = '1';
+                    interactiveGrid.style.webkitMaskImage = maskVal;
+                    interactiveGrid.style.maskImage = maskVal;
+                }
+
+                requestAnimationFrame(renderCursorLight);
+            }
+
+            requestAnimationFrame(renderCursorLight);
+        }
+
+        function initParticles() {
+            const canvas = document.getElementById('bgParticlesCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const count = Math.min(62, Math.floor((width * height) / 25000));
+            const particles = Array.from({ length: count }, () => {
+                const vx = (Math.random() - 0.5) * 0.35;
+                const vy = (Math.random() - 0.5) * 0.35;
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx,
+                    vy,
+                    baseVx: vx,
+                    baseVy: vy,
+                    r: Math.random() * 1.8 + 0.6,
+                    alpha: Math.random() * 0.45 + 0.15
+                };
+            });
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                const interactionRadius = 175;
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+
+                    // Subtle magnetic swirl & repulsion interaction with cursor light
+                    let proximityBoost = 0;
+                    if (interactivePointer.active) {
+                        const dxCursor = p.x - interactivePointer.smoothX;
+                        const dyCursor = p.y - interactivePointer.smoothY;
+                        const distCursor = Math.hypot(dxCursor, dyCursor);
+
+                        if (distCursor < interactionRadius && distCursor > 0.1) {
+                            const force = (1 - distCursor / interactionRadius);
+                            proximityBoost = force;
+                            const angle = Math.atan2(dyCursor, dxCursor);
+                            // Gentle outward wave + orbital swirl
+                            p.vx += (Math.cos(angle) * 0.085 - Math.sin(angle) * 0.055) * force;
+                            p.vy += (Math.sin(angle) * 0.085 + Math.cos(angle) * 0.055) * force;
+
+                            // Connect luminous filament from background particle to cursor light
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(interactivePointer.smoothX, interactivePointer.smoothY);
+                            ctx.strokeStyle = `rgba(147, 197, 253, ${(force * 0.34).toFixed(3)})`;
+                            ctx.lineWidth = 0.85;
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Damp velocity back toward natural ambient drift
+                    p.vx += (p.baseVx - p.vx) * 0.03;
+                    p.vy += (p.baseVy - p.vy) * 0.03;
+
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    const activeRadius = p.r + proximityBoost * 1.5;
+                    const activeAlpha = Math.min(0.95, p.alpha * 1.05 + proximityBoost * 0.55);
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, activeRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = proximityBoost > 0.15
+                        ? `rgba(191, 219, 254, ${activeAlpha.toFixed(3)})`
+                        : `rgba(59, 130, 246, ${activeAlpha.toFixed(3)})`;
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const q = particles[j];
+                        const dx = p.x - q.x;
+                        const dy = p.y - q.y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(q.x, q.y);
+                            ctx.strokeStyle = `rgba(37, 99, 235, ${(1 - dist / 120) * 0.16})`;
+                            ctx.lineWidth = 0.75;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        function initScrollRevealAndNav() {
+            // Trigger full-page entrance cascade immediately on initial page open
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.page-enter-item').forEach((el) => {
+                    el.classList.add('is-entered');
+                });
+            });
+
+            // Secret keyboard shortcut (Ctrl + Shift + E) for owner to toggle edit mode
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.code === 'KeyE') {
+                    e.preventDefault();
+                    toggleEditMode();
+                }
+            });
+
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            reveals.forEach(el => observer.observe(el));
+
+            // Ultra-smooth 120FPS ease-out (fast-to-slow) navigation scroll engine
+            let activeNavScrollRaf = null;
+
+            function cancelNavScroll() {
+                if (activeNavScrollRaf !== null) {
+                    cancelAnimationFrame(activeNavScrollRaf);
+                    activeNavScrollRaf = null;
+                }
+            }
+
+            // Yield immediately if user manually scrolls with wheel or touch
+            window.addEventListener('wheel', cancelNavScroll, { passive: true });
+            window.addEventListener('touchstart', cancelNavScroll, { passive: true });
+
+            function smoothScrollToTarget(targetEl) {
+                cancelNavScroll();
+
+                const headerEl = document.querySelector('header');
+                const headerOffset = (headerEl ? headerEl.offsetHeight : 80) + 24;
+                const startY = window.scrollY || window.pageYOffset;
+                const rawTargetY = targetEl.getBoundingClientRect().top + startY - headerOffset;
+                const maxScrollY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                const destinationY = Math.max(0, Math.min(rawTargetY, maxScrollY));
+                const distance = destinationY - startY;
+
+                if (Math.abs(distance) < 2) return;
+
+                // Duration scales gently with distance (+300ms slower for smoother glide)
+                const duration = Math.min(1650, Math.max(980, Math.abs(distance) * 0.42 + 300));
+                const startTime = performance.now();
+
+                // Quintic ease-out: fast initial launch, silky gradual deceleration at destination
+                function easeOutQuint(t) {
+                    return 1 - Math.pow(1 - t, 5);
+                }
+
+                function step(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(1, elapsed / duration);
+                    const eased = easeOutQuint(progress);
+                    const currentY = startY + distance * eased;
+
+                    window.scrollTo(0, currentY);
+
+                    if (progress < 1) {
+                        activeNavScrollRaf = requestAnimationFrame(step);
+                    } else {
+                        window.scrollTo(0, destinationY);
+                        activeNavScrollRaf = null;
+                    }
+                }
+
+                activeNavScrollRaf = requestAnimationFrame(step);
+            }
+
+            document.querySelectorAll('.nav-smooth-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            smoothScrollToTarget(target);
+                        }
+                    }
+                });
+            });
+
+            // Close modals on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                    closeProjectModal();
+                    closeExperienceModal();
+                }
+            });
+        }
+
+        // Initialize full application on window load
+        window.onload = function () {
+            const footerYearEl = document.getElementById('footerYear');
+            if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+
+            renderProfile();
+            renderAllSections();
+            initShowreelCarousels();
+            initCursorEchoAndBackgroundInteraction();
+            initParticles();
+            initScrollRevealAndNav();
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        };
+    </script>
+</body>
+</html>
